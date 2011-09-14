@@ -1,0 +1,13 @@
+map e scroll down
+map u scroll up
+map n scroll left
+map i scroll right
+
+map <PageUp> navigate previous
+map <PageDown> navigate next
+
+map q quit
+map Z quit
+
+set scroll_wrap false
+
