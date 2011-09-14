@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config version="2" xmlns="http://mediatomb.cc/config/2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://mediatomb.cc/config/2 http://mediatomb.cc/config/2.xsd">
+  <server>
+    <port>49152</port>
+    <ui enabled="no" show-tooltips="yes">
+      <accounts enabled="no" session-timeout="30">
+        <account user="mediatomb" password="mediatomb"/>
+      </accounts>
+    </ui>
+    <name>MediaTomb</name>
+    <udn>uuid:835a4a8b-7bf7-4be7-8870-957f47e8bef5</udn>
+    <home>/home/anachron/.mediatomb</home>
+    <webroot>/usr/share/mediatomb/web</webroot>
+    <storage>
+      <sqlite3 enabled="yes">
+        <database-file>mediatomb.db</database-file>
+      </sqlite3>
+    </storage>
+    <protocolInfo extend="yes"/><!-- For PS3 support change to "yes" -->
+    <!--
+       Uncomment the lines below to get rid of jerky avi playback on the
+       DSM320 or to enable subtitles support on the DSM units
+    -->
+    <!--
+    <custom-http-headers>
+      <add header="X-User-Agent: redsonic"/>
+    </custom-http-headers>
+
+    <manufacturerURL>redsonic.com</manufacturerURL>
+    <modelNumber>105</modelNumber>
+    -->
+    <!-- Uncomment the line below if you have a Telegent TG100 -->
+    <!--
+       <upnp-string-limit>101</upnp-string-limit>
+    -->
+    <extended-runtime-options>
+      <ffmpegthumbnailer enabled="yes">
+        <thumbnail-size>128</thumbnail-size>
+        <seek-percentage>5</seek-percentage>
+        <filmstrip-overlay>yes</filmstrip-overlay>
+        <workaround-bugs>no</workaround-bugs>
+        <image-quality>8</image-quality>
+      </ffmpegthumbnailer>
+      <mark-played-items enabled="yes" suppress-cds-updates="yes">
+        <string mode="prepend">*</string>
+        <mark>
+          <content>video</content>
+        </mark>
+      </mark-played-items>
+    </extended-runtime-options>
+  </server>
+
+  <import hidden-files="no">
+    <scripting script-charset="UTF-8">
+      <common-script>/usr/share/mediatomb/js/common.js</common-script>
+      <playlist-script>/usr/share/mediatomb/js/playlists.js</playlist-script>
+      <virtual-layout type="builtin">
+        <import-script>/usr/share/mediatomb/js/import.js</import-script>
+        <!--<import-script>/home/anachron/.mediatomb/import.js</import-script>-->
+    
+      </virtual-layout>
+    </scripting>
+    <autoscan use-inotify="auto">
+        <directory location="/home/anachron/video/" mode="inotify"
+                recursive="yes" hidden-files="no"/>
+    </autoscan>
+    <mappings>
+      <extension-mimetype ignore-unknown="no">
+        <map from="mp3" to="audio/mpeg"/>
+        <map from="wmv" to="video/transcode"/>
+        <map from="flv" to="video/transcode"/>
+        <map from="mkv" to="video/transcode"/>
+        <map from="rm"  to="video/transcode"/>
+        <map from="iso" to="video/transcode"/>
+        <map from="ogm" to="video/transcode"/>
+        <map from="mp4" to="video/transcode"/>
+        <map from="avi" to="video/transcode"/>
+      </extension-mimetype>
+      <mimetype-upnpclass>
+        <map from="audio/*" to="object.item.audioItem.musicTrack"/>
+        <map from="video/*" to="object.item.videoItem"/>
+        <map from="image/*" to="object.item.imageItem"/>
+      </mimetype-upnpclass>
+      <mimetype-contenttype>
+        <treat mimetype="audio/mpeg" as="mp3"/>
+        <treat mimetype="video/transcode" as="mpg"/>
+        <treat mimetype="video/divx" as="mpg"/>
+        <treat mimetype="video/xvid" as="mpg"/>
+        <treat mimetype="video/x-divx" as="mpg"/>
+        <treat mimetype="video/x-xvid" as="mpg"/>
+        <treat mimetype="video/x-avi" as="mpg"/>
+      </mimetype-contenttype>
+    </mappings>
+   <online-content>
+      <YouTube enabled="no" refresh="28800" update-at-start="no" purge-after="604800" racy-content="exclude" format="mp4" hd="no">
+        <favorites user="mediatomb"/>
+        <standardfeed feed="most_viewed" time-range="today"/>
+        <playlists user="mediatomb"/>
+        <uploads user="mediatomb"/>
+        <standardfeed feed="recently_featured" time-range="today"/>
+      </YouTube>
+    </online-content>
+  </import>
+  <transcoding enabled="yes">
+    <mimetype-profile-mappings>
+      <transcode mimetype="video/transcode" using="multifunctional"/>
+      <transcode mimetype="video/xvid" using="multifunctional"/>
+    </mimetype-profile-mappings>
+    <profiles>
+      <profile name="multifunctional" enabled="yes" type="external">
+        <mimetype>video/mpeg</mimetype>
+        <first-resource>yes</first-resource>
+        <agent command="/home/anachron/bin/mediatomb-multifunctional.sh" arguments="%in %out"/>
+        <buffer size="102400" chunk-size="51200" fill-size="20480"/>
+        <avi-fourcc-list mode="process"> 
+            <fourcc>DIV3</fourcc> 
+            <fourcc>DIV4</fourcc> 
+            <fourcc>XVID</fourcc>
+        </avi-fourcc-list>
+      </profile>
+    </profiles>   
+  </transcoding>
+</config>
