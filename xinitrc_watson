@@ -1,0 +1,14 @@
+#!/bin/sh
+
+run_programs()
+{
+    skype &
+    kopete &
+    mediatomb -l ~/.mediatomb/mediatomb.log &
+    #minidlna &
+    pms &
+    rsibreak &
+    spotify &
+    firefox &
+}
+

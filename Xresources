@@ -1,0 +1,71 @@
+! ----- FONT RENDERING -----
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.dpi: 96
+Xft.rgba: rgb
+
+! ----- COLORS -----
+*foreground: #DCDCCC
+*background: #2C2C2C
+! Black (not tango) + DarkGrey
+*color0:  #3f3f3f
+*color8:  #709080
+! DarkRed + Red
+*color1:  #705050
+*color9:  #DCA3A3
+! DarkGreen + Green
+*color2:  #60B48A
+*color10: #72D5A3
+! DarkYellow + Yellow
+*color3:  #DFAF8F
+*color11: #F0DFAF
+! DarkBlue + Blue
+*color4:  #9AB8D7
+*color12: #94BFF3
+! DarkMangenta + Mangenta
+*color5:  #DC8CC3
+*color13: #EC93D3
+!DarkCyan + Cyan (both not tango)
+*color6:  #8CD0D3
+*color14: #93E0E3
+! LightGrey + White
+*color7:  #DCDCCC
+*color15: #ffffff
+
+
+! ----- URXVT -----
+! style
+URxvt.geometry:    120x35
+URxvt.depth:       32
+URxvt.background:  rgba:2c00/2c00/2c00/dddd
+URxvt.scrollstyle: small
+URxvt.scrollBar:   false
+URxvt.scrollBar_right: true
+URxvt.scrollBar_floating: true
+
+URxvt.perl-ext-common:  default,matcher
+URxvt.urlLauncher:      /usr/bin/firefox
+URxvt.matcher.button:   1 
+
+URxvt.urgentOnBell:     true
+! Prevent annoying flash on backspace etc.
+URxvt.visualBell:       false
+
+! font settings
+!URxvt.font:        -*-droid sans mono dotted-*-*-*-*-*-*-*-*-*-*-*-u
+!URxvt.font:        xft:Droid Sans Mono Dotted:size=9:antialias=true
+!URxvt.font:         xft:Inconsolata-g:size=10:style=g:
+URxvt.font:         xft:Inconsolata-g:size=11
+URxvt.letterSpace: -2
+!URxvt.boldFont:    -*-droid sans mono dotted-*-*-*-*-*-*-*-*-*-*-*-u
+!URxvt.font:         xft:Terminus:size=12
+
+! key mappings
+!URxvt.keysym.
+!URxvt.keysym.Control-Up:   \033[1;5A
+!URxvt.keysym.Control-Down:    \033[1;5B
+!URxvt.keysym.Control-Left:    \033[1;5D
+!URxvt.keysym.Control-Right:    \033[1;5C

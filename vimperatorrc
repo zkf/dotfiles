@@ -1,0 +1,25 @@
+"2.3.1 (created: 2010/04/07 18:56:53)
+
+noremap h <Nop>
+noremap H <Nop>
+noremap n 3h
+noremap k n
+noremap N H
+noremap K N
+noremap e 3j
+noremap E <C-d>
+noremap u 3k
+noremap U <C-u>
+noremap j u
+noremap i 3l
+noremap l i
+noremap L I
+noremap I L
+
+" Show tab numbers
+set tabnumbers
+
+set runtimepath=/home/anachron/.vimperator
+source! /home/anachron/.vimperatorrc.local
+
+" vim: set ft=vim:
