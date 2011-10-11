@@ -1,0 +1,5 @@
+[user]
+	email = tilbjornar@gmail.com
+	name = Bjørnar Hansen
+[core]
+	excludesfile = /home/anachron/config/gitignore_global
