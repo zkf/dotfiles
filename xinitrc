@@ -17,6 +17,9 @@ fi
 # load X settings
 xrdb -load ~/.Xresources 
 
+# set X cursor
+xsetroot -cursor_name left_ptr
+
 # Speed up key repeating
 xset r rate 250
 
