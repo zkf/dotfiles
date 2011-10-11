@@ -214,6 +214,7 @@ myManageHook = (composeAll
     , className      =? "Kopete"             --> doShift ( workspace "com" )
     , className      =? "Spotify"            --> doShift ( workspace "mus" )
     , className      =? "Firefox"            --> doShift ( workspace "web" )
+    , className      =? "St80"               --> doFloat -- MetaEdit+
     , isFullscreen                           --> doFullFloat
     ]) <+> manageDocks
     where workspace wsName = case (M.lookup wsName wsNameToId) of
