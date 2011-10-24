@@ -46,10 +46,10 @@ pcm.headphones {
 	type rate
 	slave {
 		pcm "plug:bs2b"
-		rate 44100
+		rate 48000
 	}
 	# Choices: samplerate_best samplerate_medium samplerate samplerate_order samplerate_linear
-	converter "samplerate_best"
+	#converter "samplerate_best"
 
     hint {
         show on
