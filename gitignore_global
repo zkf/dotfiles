@@ -6,6 +6,7 @@
 *.fdb_latexmk
 *.run.xml
 *-blx.bib
+*.toc
 
 # Compiled sources #
 ####################
