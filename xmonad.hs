@@ -146,8 +146,9 @@ wsColorMap =
 myKeys = \conf -> mkKeymap conf $
     [ 
         -- Spawn applications
-        ("M-S-<Return>" , spawn $ XMonad.terminal conf) , 
-        ("M-l"          , shellPrompt myShellPrompt)    , 
+        ("M-S-<Return>" , spawn $ XMonad.terminal conf)        , 
+        ("M-l"          , shellPrompt myShellPrompt)           , 
+        ("M-<F12>"      , spawn "/home/anachron/bin/udsks.sh") ,
 
         -- Multimedia keys
         ("<XF86AudioLowerVolume>", spawn "/home/anachron/bin/dvol.sh -d 2")  ,
