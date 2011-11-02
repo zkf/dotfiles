@@ -150,9 +150,10 @@ myKeys = \conf -> mkKeymap conf $
         ("M-l"          , shellPrompt myShellPrompt)    , 
 
         -- Multimedia keys
-        ("<XF86AudioLowerVolume>", spawn "/home/anachron/bin/dvol.sh -d 2"),
-        ("<XF86AudioRaiseVolume>", spawn "/home/anachron/bin/dvol.sh -i 2"),
-        ("<XF86AudioMute>"       , spawn "/home/anachron/bin/dvol.sh -t")  ,
+        ("<XF86AudioLowerVolume>", spawn "/home/anachron/bin/dvol.sh -d 2")  ,
+        ("<XF86AudioRaiseVolume>", spawn "/home/anachron/bin/dvol.sh -i 2")  ,
+        ("<XF86AudioMute>"       , spawn "/home/anachron/bin/dvol.sh -t")    ,
+        ("<XF86Tools>"           , spawn "amixer set 'Front Panel' toggle")  ,
 
         -- Layout
         ("M-\\" , sendMessage NextLayout)      ,
