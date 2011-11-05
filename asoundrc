@@ -14,7 +14,7 @@ pcm.skype {
     playback.pcm "plug:dmix"
     capture.pcm {
         type hw
-        card DX
+        card 0
         device 0
         subdevice 0
     }
