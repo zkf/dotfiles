@@ -216,6 +216,7 @@ myManageHook = (composeAll
     , className      =? "Kopete"             --> doShift ( workspace "com" )
     , className      =? "Spotify"            --> doShift ( workspace "mus" )
     , className      =? "Firefox"            --> doShift ( workspace "web" )
+    , title          =? "glxgears"           --> doFloat
     , className      =? "St80"               --> doFloat -- MetaEdit+
     , isFullscreen                           --> doFullFloat
     ]) <+> manageDocks
