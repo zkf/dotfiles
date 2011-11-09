@@ -8,5 +8,6 @@ run_programs()
     pms &
     tomahawk &
     firefox &
+    dropboxd &
 }
 
