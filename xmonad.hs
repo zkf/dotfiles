@@ -43,6 +43,7 @@ import XMonad.Hooks.UrgencyHook
 
 import XMonad.Actions.UpdatePointer
 import XMonad.Actions.CopyWindow
+import XMonad.Actions.SinkAll
 
 import qualified Data.Map         as M
 import qualified XMonad.StackSet  as W
@@ -164,12 +165,18 @@ myKeys = \conf -> mkKeymap conf $
 
         -- Windows
         ("M-c" , kill1),
+        ("M-f" , withFocused $ windows . W.sink),
+        ("M-S-f", sinkAll),
 
         -- Move focus
         ("M-n" , sendMessage $ Go L) , 
         ("M-e" , sendMessage $ Go D) , 
         ("M-i" , sendMessage $ Go R) , 
         ("M-u" , sendMessage $ Go U) , 
+
+        -- Move focus (on floats)
+        ("M-<Page_Down>", windows W.focusDown),
+        ("M-<Page_Up>"  , windows W.focusUp  ),
 
         -- Move / swap windows
         ("M-S-n" , sendMessage $ Swap L) , 
@@ -218,6 +225,7 @@ myManageHook = (composeAll
     , className      =? "Firefox"            --> doShift ( workspace "web" )
     , title          =? "glxgears"           --> doFloat
     , className      =? "St80"               --> doFloat -- MetaEdit+
+    , title          =? "MetaEdit+ Startup Launcher"      --> doFloat -- MetaEdit+ (wine)
     , isFullscreen                           --> doFullFloat
     ]) <+> manageDocks
     where workspace wsName = case (M.lookup wsName wsNameToId) of
