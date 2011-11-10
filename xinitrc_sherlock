@@ -1,7 +1,0 @@
-#!/bin/sh
-
-run_programs()
-{
-    nm-applet &
-}
-

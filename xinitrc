@@ -5,11 +5,20 @@
 # Executed by startx (run your window manager from here)
 #
 
-## Load host-specific functions
-H=${HOSTNAME}
-if [ -f config/xinitrc_${H} ]; then
-    . config/xinitrc_${H}
-fi
+## Start host-specific programs
+case ${HOSTNAME} in 
+    watson)   skype &
+              mediatomb -l ~/.mediatomb/mediatomb.log &
+              #minidlna &
+              pms &
+              tomahawk &
+              firefox &
+              dropboxd & 
+              ;;
+
+    sherlock) nm-applet & 
+              ;;
+esac
 
 # Allow boinc to use GPU
 #xhost local:boinc
@@ -26,9 +35,6 @@ xset r rate 250
 # Generate a new background
 WP=/tmp/wall.png
 (~/bin/fortunewall $WP && habak -hi $WP) &
-
-# Start some programs
-run_programs
 
 wm_bin="$1"
 
