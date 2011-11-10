@@ -74,6 +74,9 @@ set complete+=k
 "runtime ftplugin/man.vim
 "runtime syntax/man.vim
 
+" Use mouse
+set mouse=a
+
 " Colemak keybindings, sane navigation with UNEI
 noremap u k
 noremap U 5k
