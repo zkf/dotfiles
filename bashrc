@@ -1,3 +1,10 @@
+## PATH
+# Add private bin dir to PATH
+PATH=$HOME/bin/:$PATH
+
+# Add Android dev tools to PATH
+PATH=$PATH:/opt/android-sdk/platform-tools/:/opt/android-sdk/tools/
+
 # Check for an interactive session
 [ -z "$PS1" ] && return
 
@@ -11,13 +18,6 @@ if [ -n "$SSH_CLIENT" ]; then
 fi
 PS1="$HOST\[\e[0;32m\]\u \[\e[0;34m\]\W$(__git_ps1)\[\e[1;32m\]\$\[\e[0m\] "
 #PS1='\$ '
-
-## PATH
-# Add private bin dir to PATH
-PATH=$HOME/bin/:$PATH
-
-# Add Android dev tools to PATH
-PATH=$PATH:/opt/android-sdk/platform-tools/:/opt/android-sdk/tools/
 
 ## Color for ls
 eval $(dircolors -b ~/.dir_colors)
