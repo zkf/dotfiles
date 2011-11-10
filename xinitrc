@@ -17,6 +17,7 @@ case ${HOSTNAME} in
               ;;
 
     sherlock) nm-applet & 
+              dropboxd & 
               ;;
 esac
 
