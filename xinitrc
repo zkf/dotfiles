@@ -16,7 +16,9 @@ case ${HOSTNAME} in
               dropboxd & 
               ;;
 
-    sherlock) nm-applet & 
+    sherlock) xinput set-prop 12 "Synaptics Coasting Speed" 5 6
+              xmodmap ~/.Xmodmap
+              nm-applet & 
               dropboxd & 
               ;;
 esac
