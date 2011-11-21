@@ -16,7 +16,7 @@ shopt -s no_empty_cmd_completion
 if [ -n "$SSH_CLIENT" ]; then
     HOST='[\e[0;35m\H\e[0m] '
 fi
-PS1="$HOST\[\e[0;32m\]\u \[\e[0;34m\]\W$(__git_ps1)\[\e[1;32m\]\$\[\e[0m\] "
+PS1="$HOST\[\e[0;32m\]\u \[\e[0;34m\]\W\$(__git_ps1)\[\e[1;32m\]\$\[\e[0m\] "
 #PS1='\$ '
 
 ## Color for ls
@@ -42,3 +42,13 @@ export EDITOR=vim
 if [ -f .aliases ]; then
     . .aliases
 fi
+
+## set the title of urxvt
+# not compatible with __git_ps1 in PS1 above 
+#case "$TERM" in 
+#    rxvt*)
+#        set -o functrace
+#        trap '[[ "${BASH_SOURCE}" ]] ||
+#            printf "\e]0;%s\a" "$BASH_COMMAND" >/dev/tty' DEBUG
+#        ;;
+#esac
