@@ -222,6 +222,7 @@ myManageHook = (composeAll
     , className      =? "Skype"              --> doShift ( workspace "com" )
     , className      =? "Kopete"             --> doShift ( workspace "com" )
     , className      =? "Spotify"            --> doShift ( workspace "mus" )
+    , className      =? "Tomahawk"           --> doShift ( workspace "mus" )
     , className      =? "Firefox"            --> doShift ( workspace "web" )
     , title          =? "glxgears"           --> doFloat
     , className      =? "St80"               --> doFloat -- MetaEdit+
