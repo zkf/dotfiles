@@ -111,7 +111,7 @@
         <mimetype>video/mpeg</mimetype>
         <first-resource>yes</first-resource>
         <agent command="/home/anachron/bin/mediatomb-multifunctional.sh" arguments="%in %out"/>
-        <buffer size="102400" chunk-size="51200" fill-size="20480"/>
+        <buffer size="819200" chunk-size="204800" fill-size="409600"/>
         <avi-fourcc-list mode="process"> 
             <fourcc>DIV3</fourcc> 
             <fourcc>DIV4</fourcc> 
