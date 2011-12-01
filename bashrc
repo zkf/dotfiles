@@ -20,7 +20,8 @@ PS1="$HOST\[\e[0;32m\]\u \[\e[0;34m\]\W\$(__git_ps1)\[\e[1;32m\]\$\[\e[0m\] "
 #PS1='\$ '
 
 ## Color for ls
-eval $(dircolors -b ~/.dir_colors)
+#eval $(dircolors -b ~/.dir_colors)
+eval $(dircolors -b ~/config/dircolors-solarized.ansi-universal)
 
 ## colors for grep
 export GREP_COLOR="1;33"
