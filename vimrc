@@ -1,20 +1,28 @@
+" pathogen makes it easy to install plugins etc.
+call pathogen#infect()
+call pathogen#helptags()
+
 " Put backups and swap files in ~/tmp
 set backup
 set backupdir=~/.tmp
 set dir=~/.tmp
 
 " Color settings
+syntax enable    " Enable syntax highlighting
 set background=dark
+call togglebg#map("<F5>") " for solarized
+colorscheme solarized
+
 "256 color terminal
-set t_Co=256 
+" set t_Co=256 
 "TODO make colorscheme switcher hotkey
 "colorscheme desert256
 "colorscheme lucius
-colorscheme molokai
+"colorscheme molokai
 "unsure what this does, remove?
 "highlight Normal ctermbg=none 
 "for popup menu
-highlight pmenu ctermbg=248 ctermfg=16
+"highlight pmenu ctermbg=248 ctermfg=16
 
 " for spelling; use set spell to enable
 "highlight clear SpellBad
@@ -49,7 +57,6 @@ set hlsearch    " Highlight all matches
 set ignorecase  " Case-insensitive search
 
 set number       " Show line numbers
-syntax on    " Enable syntax highlighting
 set autoread " Reload changed file automatically
 
 
