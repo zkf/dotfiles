@@ -4,7 +4,7 @@
 --
 -- XMonad version 0.9.2
 --
--- {{{ imports
+{-- imports --}
 import XMonad hiding ( (|||) )
 import System.Exit
 import System.IO (hPutStrLn)
@@ -47,72 +47,64 @@ import XMonad.Actions.SinkAll
 
 import qualified Data.Map         as M
 import qualified XMonad.StackSet  as W
--- }}} 
 
---{{{ Theme / color settings
--- TODO: use namespaces / modules rather than prefixes
+import qualified SolarizedColors  as Color
 
--- define some colors
-colorDarkBlue     = "#0c1021"
-colorDarkOrange   = "DarkOrange"
-colorLightestGray = "#f8f8f8"
-colorGreen        = "#61ce3c"
-colorRed          = "#aa3333"
-colorSnow4        = "snow4"
+{-- Theme / color settings --}
 
 -- define some fonts
-fontInconsolata = "xft:Inconsolata-g:size=11"
+fontInconsolata = "xft:Inconsolata-g:size=12"
 fontDroidSansMono = "xft:Droid Sans Mono Dotted:size = 14"
 
---TODO add terminus
---fontTerminus = 
+background = Color.base03
+foreground = Color.base0
+border     = Color.green
 
-myFocusedBorderColor = colorRed
-myNormalBorderColor  = colorSnow4
+myFocusedBorderColor = border
+myNormalBorderColor  = Color.base01
 
-dzenBgColor = colorDarkBlue
-dzenFgColor = colorSnow4
 dzenFont    = drop 4 fontInconsolata  --dzen does not support `xft:` when xmonad launches it
+dzenBgColor = background
+dzenFgColor = foreground
 
 -- Shell prompt theme
 myShellPrompt = defaultXPConfig
         {   
-                font              = fontDroidSansMono,
-                bgColor           = colorDarkBlue,
-                fgColor           = colorLightestGray, 
-                fgHLight          = "#fafafa",
-                bgHLight          = "steelblue3",
-                borderColor       = colorDarkOrange,
-                promptBorderWidth = 1,
+                font              = fontInconsolata,
+                bgColor           = background,
+                fgColor           = foreground, 
+                fgHLight          = Color.base03,
+                bgHLight          = Color.yellow,
+                borderColor       = border,
+                promptBorderWidth = 2,
                 position          = Top,
-                height            = 22,
+                height            = 24,
                 defaultText       = ""
         }
 
 -- Pretty printing for logHook
 myPP h = defaultPP
-    {   ppCurrent         = dzenColor "" "#2c3041" . pad . wsName, 
+    {   ppCurrent         = dzenColor Color.base03 Color.base00 . pad . wsName, 
         ppHidden          = pad . (\wsId ->  dzenColor (ppMultiColor wsId) "" (wsName wsId)),
-        ppHiddenNoWindows = dzenColor "#606060" "" . pad . wsName,
-        ppLayout          = dzenColor "#909090" "" . pad,
-        ppUrgent          = dzenColor "#909090" "#662222" . dzenStrip . wsName,
-        ppSep             = dzenColor "#e09090" "" "—",
+        ppHiddenNoWindows = dzenColor Color.base01 "" . pad . wsName,
+        ppLayout          = dzenColor foreground "" . pad,
+        ppUrgent          = dzenColor foreground Color.red . dzenStrip . wsName,
+        ppSep             = dzenColor Color.base01 "" "¦",
         ppWsSep           = "",
-        ppTitle           = dzenColor "#9090e0" "" . pad . shorten 100,
+        ppTitle           = dzenColor Color.violet "" . pad . shorten 100,
         ppOutput          = hPutStrLn h
         -- ppExtras = logLoad : L.date ("^pa(1250)^bg() %a, %b %d ^fg(white)%H:%M^fg()") : []
     }
     where ppMultiColor wsId = case (M.lookup wsId wsColorMap) of
-                                        Nothing    -> "#909090"
+                                        Nothing    -> Color.base1
                                         Just color -> color
                                             
           wsName wsId = case (M.lookup wsId wsNameMap) of
                                 Nothing    -> wsId
-                                Just name  -> wsId ++ "¦" ++ name
+                                Just name  -> wsId ++ ":" ++ name
 
---}}} end theme settings
 
---{{{ Workspaces
+{-- Workspaces --}
 
 myWorkspaces :: [WorkspaceId]
 myWorkspaces = map show [1..9] ++ ["0"]
@@ -130,20 +122,18 @@ wsNameToId = M.fromList $ zip myWorkspaceNames myWorkspaces
 -- Workspace colors map 
 wsColorMap :: M.Map WorkspaceId [Char] 
 wsColorMap = 
-        M.fromList $ zip myWorkspaces [ "#aaccee", "#eebbaa", "#aa99ee", "#bb99aa", "#ee9988" ]
-{-
-        (wsDoc, "#bbdd99") ,
-        (wsWork, "#edcd88"),
-        (wsTest, "#ee8844"),
-        (wsMisc, "grey90"),
-        (wsLog, "#ee9988"),
-        (wsWrite, "#aaeebb"),
-        (wsRead, "#888888") ]
--}
---}}}
+        M.fromList $ zip myWorkspaces
+            [ Color.yellow
+            , Color.orange
+            , Color.magenta
+            , Color.violet
+            , Color.blue
+            , Color.cyan
+            , Color.green
+            ]
 
---{{{ Key bindings
---TODO add focusUrgent keybind
+{-- Key bindings --}
+--TODO: add focusUrgent keybind
 myKeys = \conf -> mkKeymap conf $
     [ 
         -- Spawn applications
@@ -167,6 +157,7 @@ myKeys = \conf -> mkKeymap conf $
         ("M-c" , kill1),
         ("M-f" , withFocused $ windows . W.sink),
         ("M-S-f", sinkAll),
+        ("M-k"  , spawn "/usr/bin/xcalib -invert -alter") ,
 
         -- Move focus
         ("M-n" , sendMessage $ Go L) , 
@@ -213,9 +204,7 @@ myKeys = \conf -> mkKeymap conf $
         | (i, k) <- zip (XMonad.workspaces conf) (['1' .. '9'] ++ ['0', '-'])
     ]
 
---}}}
-
--- {{{ Hooks
+{--  Hooks --}
 
 myManageHook = (composeAll
     [ className      =? "stalonetray"        --> doIgnore
@@ -251,8 +240,6 @@ myLayoutHook =  avoidStruts
 myLogHook dzpipe =
         dynamicLogWithPP (myPP dzpipe) >> updatePointer (Relative 0.95 0.95)
 
--- }}}
-
 statusBarCmd = "dzen2" ++
                " -bg '" ++ dzenBgColor ++ "'" ++
                " -fg '" ++ dzenFgColor ++ "'" ++
@@ -260,7 +247,6 @@ statusBarCmd = "dzen2" ++
                " -fn '" ++ dzenFont ++ "'" ++
                " -h 16 -x 0 -y 0 -ta l -e 'onstart=lower'"
 
-    
 main :: IO ()
 main = do 
     dzpipe <- spawnPipe statusBarCmd
@@ -279,7 +265,4 @@ main = do
             terminal    = "~/bin/urxvtc",
             workspaces  = myWorkspaces
         }
-        
-
-
 
