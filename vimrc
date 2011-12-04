@@ -24,16 +24,6 @@ colorscheme solarized
 "for popup menu
 "highlight pmenu ctermbg=248 ctermfg=16
 
-" for spelling; use set spell to enable
-"highlight clear SpellBad
-"highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
-"highlight clear SpellCap
-"highlight SpellCap term=underline cterm=underline
-"highlight clear SpellRare
-"highlight SpellRare term=underline cterm=underline
-"highlight clear SpellLocal
-"highlight SpellLocal term=underline cterm=underline
-
 " use fast tty
 set ttyfast
 
@@ -43,8 +33,8 @@ set shiftwidth=4  " Insert 4 spaces for each tab
 set tabstop=4
 set smarttab
 
-set ai     " Auto indent
-set si     " Smart indent
+set autoindent
+set smartindent
 set wrap   " Wrap lines
 
 set linebreak       " Wrap long lines at the chars found in 'breakat'
@@ -63,8 +53,15 @@ set autoread " Reload changed file automatically
 filetype plugin on            " Enable loading plugins for specific file types
 filetype plugin indent on
 
+" jump to the last cursor position
+autocmd BufReadPost *
+            \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+            \     exe "normal! g'\"" |
+            \ endif
+
 set grepprg=grep\ -nH\ $*
 
+" move this to only tex filetypes
 let g:tex_flavor='latex'
 
 autocmd BufEnter * lcd %:p:h  " Set work dir to current file's dir
@@ -107,4 +104,11 @@ noremap L E
 "the same, but backwards
 noremap gl ge
 noremap gL gE
+
+"window navigation
+map <C-e> <C-W><Down>
+map <C-u> <C-W><Up>
+map <C-n> <C-W><Left>
+map <C-i> <C-W><Right>
+
 
