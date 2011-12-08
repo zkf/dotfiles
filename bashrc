@@ -23,9 +23,6 @@ PS1="$HOST\[\e[0;32m\]\u \[\e[0;34m\]\W\$(__git_ps1)\[\e[1;32m\]\$\[\e[0m\] "
 #eval $(dircolors -b ~/.dir_colors)
 eval $(dircolors -b ~/config/dircolors-solarized.ansi-universal)
 
-## colors for grep
-export GREP_COLOR="1;33"
-
 ## Color for man
 export LESS_TERMCAP_mb=$'\e[1;31m'
 export LESS_TERMCAP_md=$'\e[1;31m'
