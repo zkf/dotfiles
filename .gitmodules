@@ -4,3 +4,9 @@
 [submodule "irssi-colors-solarized"]
 	path = irssi-colors-solarized
 	url = git://github.com/huyz/irssi-colors-solarized.git
+[submodule "vim/bundle/vim-css-color"]
+	path = vim/bundle/vim-css-color
+	url = https://github.com/skammer/vim-css-color.git
+[submodule "vim/bundle/vim-hex-highlight"]
+	path = vim/bundle/vim-hex-highlight
+	url = https://github.com/yurifury/hexHighlight.git
