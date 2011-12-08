@@ -1,0 +1,24 @@
+# Put this in ~/.config/Trolltech.conf
+
+[Qt]
+font="Sans Serif,10,-1,5,50,0,0,0,0,0"
+customColors\0=4278201142
+customColors\1=4278662722
+customColors\10=4285297092
+customColors\11=4292032130
+customColors\12=4287865249
+customColors\13=4280983960
+customColors\14=4294833891
+customColors\15=4293847253
+customColors\2=4291513110
+customColors\3=4292620847
+customColors\4=4283985525
+customColors\5=4286945536
+customColors\6=4284840835
+customColors\7=4290087168
+customColors\8=4286813334
+customColors\9=4280716242
+#              WindowText,  Button, ShadowTop,     ???, ShadowBottom, ListActive, SecWinText, Bright/unavail, ButtonText,  SecWin,  Window, SecWinBorder/shadow, Hover/HL/Prog.bar,  HLText, Hyperlink,     ???,  %2 row,    ??? ,     ???,     ???.
+Palette\active=   #839496, #073642,   #0a5163, #ff0000,      #031b21,    #268bd2,    #93a1a1,        #6c71c4,    #93a1a1, #073642, #002b36,             #000000,           #2aa198, #002b36,   #268bd2, #ff00ff, #002b36, #00ff00, #ffff00, #ff0000
+Palette\inactive= #839496, #073642,   #0a5163, #ff0000,      #031b21,    #268bd2,    #93a1a1,        #6c71c4,    #93a1a1, #073642, #002b36,             #000000,           #2aa198, #002b36,   #268bd2, #ff00ff, #002b36, #00ff00, #ffff00, #ff0000
+Palette\disabled= #586e75, #002b36,   #0a5163, #ff0000,      #031b21,    #268bd2,    #93a1a1,        #002b36,    #586e75, #073642, #002b36,             #000000,           #2aa198, #00ff00,   #268bd2, #ff00ff, #99ff99, #00ff00, #ffff00, #ff0000
