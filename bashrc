@@ -8,7 +8,7 @@ PATH=$PATH:/opt/android-sdk/platform-tools/:/opt/android-sdk/tools/
 # Check for an interactive session
 [ -z "$PS1" ] && return
 
-shopt -s no_empty_cmd_completion
+shopt -s no_empty_cmd_completion autocd checkwinsize
 
 #PS1='[\u@\h \W]\$ '
 #PS1='\[\e[1;32m\][\u@\h \W]\$\[\e[0m\] '
@@ -34,6 +34,10 @@ export LESS_TERMCAP_us=$'\e[1;32m'
 
 ## Set editor to vim
 export EDITOR=vim
+
+## 
+export PAGER=vimpager
+alias less='vimpager'
 
 ## Aliases
 # source aliases from file
