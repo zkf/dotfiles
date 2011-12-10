@@ -50,5 +50,5 @@ then
         --max-geometry 48x0 --window-layer top &
 fi
 
-exec ck-launch-session ${wm_bin}
+exec ck-launch-session dbus-launch --sh-syntax --exit-with-session ${wm_bin}
 
