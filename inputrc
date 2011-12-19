@@ -14,13 +14,14 @@ set visible-stats on
 $if term=screen-256color
     "\eOC":forward-word
     "\eOD":backward-word
+    "\b":backward-kill-word
 $endif
 $if term=rxvt-unicode-256color
     "\eOc":forward-word
     "\eOd":backward-word
+    "\b":backward-kill-word
 $endif
 
 # Ctrl-BackSpace: delete words backwards
-"\b":backward-kill-word
 # Ctrl-Delete: delete word forward
 #"\e[3^":kill-word
