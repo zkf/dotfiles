@@ -19,5 +19,8 @@ noremap I L
 " Show tab numbers
 set guioptions=ns
 
+" goto gmail
+map gm :tabopen gmail.com<CR>
+
 
 " vim: set ft=vim:
