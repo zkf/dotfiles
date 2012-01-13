@@ -29,7 +29,7 @@ URxvt.urgentOnBell:     true
 URxvt.visualBell:       false
 
 ! font settings
-URxvt.font:         xft:Inconsolata-g:size=12
+URxvt.font:         xft:Inconsolata:size=19
 !URxvt.font:        -*-droid sans mono dotted-*-*-*-*-*-*-*-*-*-*-*-u
 !URxvt.font:        xft:Droid Sans Mono Dotted:size=9:antialias=true
 !URxvt.font:        xft:Inconsolata-g:size=10:style=g:

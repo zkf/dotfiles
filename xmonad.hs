@@ -53,7 +53,7 @@ import qualified SolarizedColors  as Color
 {-- Theme / color settings --}
 
 -- define some fonts
-fontInconsolata = "xft:Inconsolata-g:size=12"
+fontInconsolata = "xft:Inconsolata:size=19"
 fontDroidSansMono = "xft:Droid Sans Mono Dotted:size = 14"
 
 background = Color.base03
