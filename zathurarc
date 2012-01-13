@@ -3,6 +3,9 @@ map u scroll up
 map n scroll left
 map i scroll right
 
+map E scroll half_down
+map U scroll half_up
+
 map <PageUp> navigate previous
 map <PageDown> navigate next
 
