@@ -1,7 +1,7 @@
 # Put this in ~/.config/Trolltech.conf
 
 [Qt]
-font="Sans Serif,10,-1,5,50,0,0,0,0,0"
+font="Droid Sans,10,-1,5,50,0,0,0,0,0"
 customColors\0=4278201142
 customColors\1=4278662722
 customColors\10=4285297092
@@ -18,7 +18,20 @@ customColors\6=4284840835
 customColors\7=4290087168
 customColors\8=4286813334
 customColors\9=4280716242
-#              WindowText,  Button, ShadowTop,     ???, ShadowBottom, ListActive, SecWinText, Bright/unavail, ButtonText,  SecWin,  Window, SecWinBorder/shadow, Hover/HL/Prog.bar,  HLText, Hyperlink,     ???,  %2 row,    ??? , tooltipBG, tooltipFG
-Palette\active=   #839496, #073642,   #0a5163, #ff0000,      #031b21,    #268bd2,    #93a1a1,        #6c71c4,    #93a1a1, #073642, #002b36,             #000000,           #839496, #073642,   #268bd2, #ff00ff, #002b36, #00ff00,   #073642,   #839496
-Palette\inactive= #839496, #073642,   #0a5163, #ff0000,      #031b21,    #268bd2,    #93a1a1,        #6c71c4,    #93a1a1, #073642, #002b36,             #000000,           #839496, #073642,   #268bd2, #ff00ff, #002b36, #00ff00,   #073642,   #839496
-Palette\disabled= #586e75, #002b36,   #0a5163, #ff0000,      #031b21,    #268bd2,    #93a1a1,        #6c71c4,    #586e75, #073642, #002b36,             #000000,           #839496, #073642,   #268bd2, #ff00ff, #002b36, #00ff00,   #073642,   #839496
+#             WindowText,  Button, ShadowTop,     ???, ShadowBottom, ListActive, SecWinText, Bright/unavail, ButtonText,  SecWin,  Window, SecWinBorder/shadow, Hover/HL/Prog.bar,  HLText, Hyperlink,     ???,  %2 row,    ??? , tooltipBG, tooltipFG
+Palette\active=  #839496, #073642,   #00495c, #003c4b,      #00181e,    #00252f,    #93a1a1,        #6c71c4,    #93a1a1, #073642, #002b36,             #001115,           #268bd2, #002b36,   #268bd2, #268bd2, #002b36, #00ff00,   #073642,   #839496
+Palette\inactive=#839496, #073642,   #00495c, #003c4b,      #00181e,    #00252f,    #93a1a1,        #6c71c4,    #93a1a1, #073642, #002b36,             #001115,           #0e3d5b, #839496,   #268bd2, #268bd2, #002b36, #00ff00,   #073642,   #839496
+Palette\disabled=#3d7a8e, #19404e,   #1d5266, #184557,      #0a1e26,    #102f3c,    #478497,        #6c71c4,    #478497, #19404e, #133644,             #07161b,           #133644, #3d7a8e,   #25759a, #25759a, #133644, #00ff00,   #073642,   #839496
+
+KWinPalette\activeBackground=#000000
+KWinPalette\activeBlend=#ff00ff
+KWinPalette\activeForeground=#002b36
+KWinPalette\frame=#002b36
+KWinPalette\activeTitleBtnBg=#002b36
+KWinPalette\inactiveBackground=#586e75
+KWinPalette\inactiveBlend=#ff00ff
+KWinPalette\inactiveForeground=#073642
+KWinPalette\inactiveFrame=#002b36
+KWinPalette\inactiveTitleBtnBg=#002b36
+KDE\contrast=5
+
