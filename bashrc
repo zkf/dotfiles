@@ -2,25 +2,20 @@
 # Add private bin dir to PATH
 PATH=$HOME/bin/:$PATH
 
-# Add Android dev tools to PATH
-PATH=$PATH:/opt/android-sdk/platform-tools/:/opt/android-sdk/tools/
+## Add Android dev tools to PATH
+#PATH=$PATH:/opt/android-sdk/platform-tools/:/opt/android-sdk/tools/
 
-# Check for an interactive session
-[ -z "$PS1" ] && return
+## Check for an interactive session
+[[ -z "$PS1" ]] && return
 
+## Set bash shell options
 shopt -s no_empty_cmd_completion autocd checkwinsize
 
-#PS1='[\u@\h \W]\$ '
-#PS1='\[\e[1;32m\][\u@\h \W]\$\[\e[0m\] '
-#PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[m\]\[\e[1;32m\]\$ \[\e[m\]\[\e[1;37m\]'
-if [ -n "$SSH_CLIENT" ]; then
-    HOST='[\e[0;35m\H\e[0m] '
-fi
+## If we're logged in thru ssh, say so
+[[ -n "$SSH_CLIENT" ]] && HOST='[\e[0;35m\H\e[0m] '
 PS1="$HOST\[\e[0;32m\]\u \[\e[0;34m\]\W\$(__git_ps1)\[\e[1;32m\]\$\[\e[0m\] "
-#PS1='\$ '
 
 ## Color for ls
-#eval $(dircolors -b ~/.dir_colors)
 eval $(dircolors -b ~/config/dircolors-solarized.ansi-universal)
 
 ## Color for man
@@ -32,18 +27,17 @@ export LESS_TERMCAP_so=$'\e[1;44;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;32m'
 
-## Set editor to vim
+## Set up editor and pager
 export EDITOR=vim
-
-## 
-export PAGER=vimpager
-alias less='vimpager'
-
-## Aliases
-# source aliases from file
-if [ -f .aliases ]; then
-    . .aliases
+if [[ $(type -P vimpager 2>&-) ]]; then
+    export PAGER=vimpager
+    alias less='vimpager'
+else
+    export PAGER=less
 fi
+
+## Source aliases from file
+[[ -f ~/config/aliases ]] && . ~/config/aliases
 
 ## set the title of urxvt
 # not compatible with __git_ps1 in PS1 above 
