@@ -1,7 +1,7 @@
 # vim: set ft=sh
 
 alias grep='grep --color=auto'
-alias ls='ls --color=auto -F'
+alias ls='ls --color=auto -F --group-directories-first'
 alias S='sudo pacman -S'
 alias Ss='pacman -Ss'
 alias Si='pacman -Si'
