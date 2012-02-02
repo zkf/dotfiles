@@ -48,3 +48,4 @@ fi
 #            printf "\e]0;%s\a" "$BASH_COMMAND" >/dev/tty' DEBUG
 #        ;;
 #esac
+export ARCH_HASKELL='Bjørnar Hansen <tilbjornar@gmail.com>'

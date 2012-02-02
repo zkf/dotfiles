@@ -10,7 +10,7 @@ case ${HOSTNAME} in
     watson)   skype &
               mediatomb -l ~/.mediatomb/mediatomb.log &
               #minidlna &
-              pms &
+              #pms &
               tomahawk &
               firefox &
               dropboxd & 
@@ -21,7 +21,7 @@ case ${HOSTNAME} in
               nm-applet & 
               dropboxd & 
               ;;
-esac
+esac &> - # throw away output
 
 # Allow boinc to use GPU
 #xhost local:boinc

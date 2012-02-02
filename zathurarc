@@ -19,6 +19,8 @@ set browser xdg-open %s
 set scroll_wrap false
 set show_inputbar false
 
+set font inconsolata
+
 ## COLORS
 set default_bgcolor #002b36
 set inputbar_bgcolor #002b36
