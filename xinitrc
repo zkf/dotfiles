@@ -20,6 +20,7 @@ case ${HOSTNAME} in
               xmodmap ~/.Xmodmap
               nm-applet & 
               dropboxd & 
+              batti &
               ;;
 esac &> - # throw away output
 
