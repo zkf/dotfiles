@@ -33,6 +33,7 @@
     <!--
        <upnp-string-limit>101</upnp-string-limit>
     -->
+    <pc-directory upnp-hide="yes"/>
     <extended-runtime-options>
       <ffmpegthumbnailer enabled="yes">
         <thumbnail-size>128</thumbnail-size>
@@ -54,9 +55,9 @@
     <scripting script-charset="UTF-8">
       <common-script>/usr/share/mediatomb/js/common.js</common-script>
       <playlist-script>/usr/share/mediatomb/js/playlists.js</playlist-script>
-      <virtual-layout type="builtin">
-        <import-script>/usr/share/mediatomb/js/import.js</import-script>
-        <!--<import-script>/home/anachron/.mediatomb/import.js</import-script>-->
+      <virtual-layout type="js">
+        <!--<import-script>/usr/share/mediatomb/js/import.js</import-script>-->
+        <import-script>/home/anachron/.mediatomb/import.js</import-script>
     
       </virtual-layout>
     </scripting>
@@ -74,7 +75,7 @@
         <map from="iso" to="video/transcode"/>
         <map from="ogm" to="video/transcode"/>
         <map from="mp4" to="video/transcode"/>
-        <map from="avi" to="video/transcode"/>
+        <map from="avi" to="video/divx"/>
       </extension-mimetype>
       <mimetype-upnpclass>
         <map from="audio/*" to="object.item.audioItem.musicTrack"/>
@@ -82,6 +83,7 @@
         <map from="image/*" to="object.item.imageItem"/>
       </mimetype-upnpclass>
       <mimetype-contenttype>
+        <treat mimetype="audio/x-flac" as="flac"/>
         <treat mimetype="audio/mpeg" as="mp3"/>
         <treat mimetype="video/transcode" as="mpg"/>
         <treat mimetype="video/divx" as="mpg"/>
@@ -103,6 +105,9 @@
   </import>
   <transcoding enabled="yes">
     <mimetype-profile-mappings>
+      <transcode mimetype="audio/ogg" using="audio2pcm"/>
+      <transcode mimetype="audio/x-flac" using="audio2pcm"/>
+      <!--<transcode mimetype="video/ogg" using="video2mpeg"/>-->
       <transcode mimetype="video/transcode" using="multifunctional"/>
       <transcode mimetype="video/xvid" using="multifunctional"/>
     </mimetype-profile-mappings>
@@ -117,6 +122,17 @@
             <fourcc>DIV4</fourcc> 
             <fourcc>XVID</fourcc>
         </avi-fourcc-list>
+      </profile>
+      <profile name="audio2pcm" enabled="yes" type="external">
+        <mimetype>audio/L16</mimetype>
+        <accept-url>yes</accept-url>
+        <first-resource>yes</first-resource>
+        <hide-original-resource>yes</hide-original-resource>
+        <accept-ogg-theora>no</accept-ogg-theora>
+        <sample-frequency>44100</sample-frequency>
+        <audio-channels>2</audio-channels>
+        <agent command="vlc" arguments="%in -I dummy --sout=#transcode{acodec=s16b,ab=192,samplerate=44100,channels=2}:standard{access=file,mux=raw,dst=%out} vlc://quit"/>
+        <buffer size="1048576" chunk-size="131072" fill-size="262144"/>
       </profile>
     </profiles>   
   </transcoding>
