@@ -2,6 +2,9 @@
 call pathogen#infect()
 call pathogen#helptags()
 
+" Use neocomplcache
+let g:neocomplcache_enable_at_startup = 1
+
 " Put backups and swap files in ~/tmp
 set backup
 set backupdir=~/.tmp
