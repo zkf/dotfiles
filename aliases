@@ -1,26 +1,23 @@
 # vim: set ft=sh
 
-alias grep='grep --color=auto'
-alias ls='ls --color=auto -F --group-directories-first'
+alias Syu='sudo pacman -Syu'
 alias S='sudo pacman -S'
 alias Ss='pacman -Ss'
 alias Si='pacman -Si'
-alias Syu='sudo pacman -Syu'
 alias Qi='pacman -Qi'
 alias Ql='pacman -Ql'
-alias pse='ps -e |grep'
-alias view='vim -R +"set noma" +"map e <C-e>" +"map u <C-y>" +"map U <C-u>" +"map E <C-d>"'
-
-alias svim='sudo -E vim'
 alias updatemirrors='sudo reflector -a 8 -l 8 -f 4 --threads 2 --sort rate --save /etc/pacman.d/mirrorlist'
 
-#alias tv='DISPLAY=:0.1 mplayer -ao alsa:device=hw=1.3 -fs -vo gl'
-#alias prolog='swipl'
+alias svim='sudo -E vim'
 
-alias pingu='ping 8.8.8.8 -c 5 -i 0.5'
-alias today='date +%Y-%m-%d'
-alias ll='ls -la'
 alias stop='sudo systemctl poweroff'
 alias restart='sudo systemctl reboot'
+
+alias grep='grep --color=auto'
+alias ls='ls --color=auto -F --group-directories-first'
+alias ll='ls -la'
+alias psa='ps aux |grep'
+alias today='date +%Y-%m-%d'
+alias pingu='ping 8.8.8.8 -c 5 -i 0.5'
 alias periscope='periscope --language=en'
 alias irc="ssh -C bjorh08@login.uia.no -t '. .bash_profile; . .bashrc; tmux -2 a -t svale'"
