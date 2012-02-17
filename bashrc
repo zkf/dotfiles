@@ -1,6 +1,6 @@
 ## PATH
 # Add private bin dir to PATH
-PATH=$HOME/bin/:$PATH
+PATH=$HOME/bin/:$HOME/.cabal/bin:$PATH
 
 ## Add Android dev tools to PATH
 #PATH=$PATH:/opt/android-sdk/platform-tools/:/opt/android-sdk/tools/
@@ -48,4 +48,6 @@ fi
 #            printf "\e]0;%s\a" "$BASH_COMMAND" >/dev/tty' DEBUG
 #        ;;
 #esac
+## Opts for cabal2arch
 export ARCH_HASKELL='Bjørnar Hansen <tilbjornar@gmail.com>'
+export PKGBUILD_HASKELL_ENABLE_PROFILING=1
