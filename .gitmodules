@@ -10,3 +10,9 @@
 [submodule "vim/bundle/vim-hex-highlight"]
 	path = vim/bundle/vim-hex-highlight
 	url = https://github.com/yurifury/hexHighlight.git
+[submodule "vim/bundle/neocomplcache"]
+	path = vim/bundle/neocomplcache
+	url = https://github.com/Shougo/neocomplcache.git
+[submodule "vim/bundle/neocomplcache-ghc"]
+	path = vim/bundle/neocomplcache-ghc
+	url = https://github.com/ujihisa/neco-ghc.git
