@@ -132,7 +132,7 @@
         <sample-frequency>44100</sample-frequency>
         <audio-channels>2</audio-channels>
         <agent command="vlc" arguments="%in -I dummy --sout=#transcode{acodec=s16b,ab=192,samplerate=44100,channels=2}:standard{access=file,mux=raw,dst=%out} vlc://quit"/>
-        <buffer size="1048576" chunk-size="131072" fill-size="262144"/>
+        <buffer size="4194304" chunk-size="131072" fill-size="262144"/>
       </profile>
     </profiles>   
   </transcoding>
