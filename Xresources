@@ -7,6 +7,9 @@ Xft.antialias: 1
 Xft.dpi: 96
 Xft.rgba: rgb
 
+! ------ CURSOR
+Xcursor.theme: Vanilla-DMZ-AA
+
 !! ----- COLORS -----
 #include "Xresources-solarized-colors"
 

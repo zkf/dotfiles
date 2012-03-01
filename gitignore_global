@@ -7,7 +7,12 @@
 *.run.xml
 *-blx.bib
 *.toc
+*.glo
+*.ist
+*.lof
+*.lot
 
+#
 # Compiled sources #
 ####################
 *.o
