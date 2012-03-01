@@ -1,3 +1,5 @@
+let g:tex_flavor='latex'
+
 set textwidth=80
 set formatoptions+=wa
 

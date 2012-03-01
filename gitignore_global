@@ -41,6 +41,7 @@
 # Miscellaneous #
 #################
 *.pdf
+tags
 vim/spell/*
 vim/.netrwhist
 

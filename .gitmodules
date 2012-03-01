@@ -10,3 +10,15 @@
 [submodule "vim/bundle/vim-hex-highlight"]
 	path = vim/bundle/vim-hex-highlight
 	url = https://github.com/yurifury/hexHighlight.git
+[submodule "vim/bundle/neocomplcache"]
+	path = vim/bundle/neocomplcache
+	url = https://github.com/Shougo/neocomplcache.git
+[submodule "vim/bundle/neocomplcache-ghc"]
+	path = vim/bundle/neocomplcache-ghc
+	url = https://github.com/ujihisa/neco-ghc.git
+[submodule "vim/bundle/LaTeX-Box"]
+	path = vim/bundle/LaTeX-Box
+	url = https://github.com/LaTeX-Box-Team/LaTeX-Box.git
+[submodule "vim/bundle/fugitive"]
+	path = vim/bundle/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
