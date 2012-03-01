@@ -262,7 +262,7 @@ main = do
             manageHook  = manageHook defaultConfig <+> myManageHook,
             modMask     = mod4Mask,
             startupHook = setWMName "LG3D",
-            terminal    = "~/bin/urxvtc",
+            terminal    = "urxvt",
             workspaces  = myWorkspaces
         }
 
