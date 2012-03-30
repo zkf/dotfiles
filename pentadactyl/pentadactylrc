@@ -1,4 +1,7 @@
 "2.3.1 (created: 2010/04/07 18:56:53)
+" vim: set ft=vim:
+ 
+loadplugins 
 
 noremap h <Nop>
 noremap H <Nop>
@@ -15,6 +18,7 @@ noremap i 3l
 noremap l i
 noremap L I
 noremap I L
+noremap d :tabclose<CR>
 
 " Show tab numbers
 set guioptions=ns
@@ -23,4 +27,4 @@ set guioptions=ns
 map gm :tabopen gmail.com<CR>
 
 set fbwhitelist=google.com,youtube.com,rainymood.com,github.com,vimeo.com
-" vim: set ft=vim:
+"set fixfocus-key=<S-Escape>
