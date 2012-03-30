@@ -48,7 +48,7 @@ then
     xscreensaver -no-splash &
     stalonetray --geometry 1x1-0+0 --background \#002b36 \
         --icon-size 16 --grow-gravity NE --sticky --skip-taskbar \
-        --max-geometry 48x0 --window-layer top &
+        --max-geometry 64x16 --window-layer top &
     exec ck-launch-session dbus-launch --sh-syntax --exit-with-session xmonad
 elif [[ xfce4 == ${wm_bin} ]]
 then
