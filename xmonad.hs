@@ -34,7 +34,7 @@ import qualified XMonad.Layout.Magnifier as Mag
 import XMonad.Prompt
 import XMonad.Prompt.Shell
 
---import XMonad.Hooks.EwmhDesktops  -- enable if needed
+import XMonad.Hooks.EwmhDesktops 
 import XMonad.Hooks.ManageDocks   -- avoidstruts
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.DynamicLog hiding (xmobar, xmobarPP, xmobarColor, sjanssenPP, byorgeyPP)
@@ -252,6 +252,7 @@ main = do
     dzpipe <- spawnPipe statusBarCmd
     xmonad $ withUrgencyHook NoUrgencyHook defaultConfig    -- xmonad $ ewmh defaultconfig
         { 
+            handleEventHook    = fullscreenEventHook,
             borderWidth        = 2,
             normalBorderColor  = myNormalBorderColor,
             focusedBorderColor = myFocusedBorderColor,
