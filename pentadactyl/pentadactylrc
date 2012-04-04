@@ -1,24 +1,26 @@
 "2.3.1 (created: 2010/04/07 18:56:53)
 " vim: set ft=vim:
- 
+
+" it segfaults
+set loadplugins^=!'fix-focus'
 loadplugins 
 
-noremap h <Nop>
-noremap H <Nop>
-noremap n 3h
-noremap k n
-noremap N H
-noremap K N
-noremap e 3j
-noremap E <C-d>
-noremap u 3k
-noremap U <C-u>
-noremap j u
-noremap i 3l
-noremap l i
-noremap L I
-noremap I L
-noremap d :tabclose<CR>
+map -builtin h <Nop>
+map -builtin H <Nop>
+map -builtin n 3h
+map -builtin k n
+map -builtin N H
+map -builtin K N
+map -builtin e 3j
+map -builtin E <C-d>
+map -builtin u 3k
+map -builtin U <C-u>
+map -builtin j u
+map -builtin i 3l
+map -builtin l i
+map -builtin L I
+map -builtin I L
+map -builtin d :tabclose<CR>
 
 " Show tab numbers
 set guioptions=ns
