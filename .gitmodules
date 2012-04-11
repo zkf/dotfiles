@@ -1,9 +1,6 @@
 [submodule "vim/bundle/vim-colors-solarized"]
 	path = vim/bundle/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule "irssi-colors-solarized"]
-	path = irssi-colors-solarized
-	url = git://github.com/huyz/irssi-colors-solarized.git
 [submodule "vim/bundle/vim-css-color"]
 	path = vim/bundle/vim-css-color
 	url = https://github.com/skammer/vim-css-color.git
