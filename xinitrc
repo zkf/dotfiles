@@ -21,6 +21,7 @@ case ${HOSTNAME} in
               nm-applet & 
               dropboxd & 
               batti &
+              skype &
               ;;
 esac &> - # throw away output
 
@@ -46,9 +47,9 @@ if [[ xmonad == ${wm_bin} ]]
 then
     #cairo-compmgr &
     xscreensaver -no-splash &
-    stalonetray --geometry 1x1-0+0 --background \#002b36 \
-        --icon-size 16 --grow-gravity NE --sticky --skip-taskbar \
-        --max-geometry 64x16 --window-layer top &
+    trayer --transparent true --alpha 0 --tint 0x002b36 --edge top \
+        --align right --height 16  --heighttype pixel \
+        --widthtype request &
     exec ck-launch-session dbus-launch --sh-syntax --exit-with-session xmonad
 elif [[ xfce4 == ${wm_bin} ]]
 then
