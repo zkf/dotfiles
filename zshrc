@@ -35,13 +35,14 @@ PROMPT="[%{$fg[magenta]%}%M%{$reset_color%}] \
 source /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 
-## PATH
-export PATH=$HOME/bin/:$HOME/.cabal/bin:$PATH
 
 ## ALIASES
 source ~/.aliases
 
+
 ## ENVIRONMENT
+export PATH=$HOME/bin/:$HOME/.cabal/bin:$PATH
+export BROWSER="firefox"
 export EDITOR=vim
 if [[ -n $(type -p vimpager 2>&-) ]]; then
     export PAGER=vimpager
@@ -49,8 +50,6 @@ if [[ -n $(type -p vimpager 2>&-) ]]; then
 else
     export PAGER=less
 fi
-
-export BROWSER="firefox"
 
 ## Opts for cabal2arch
 export ARCH_HASKELL='Bjørnar Hansen <tilbjornar@gmail.com>'
@@ -62,29 +61,32 @@ export XDG_AUR_HOME="$HOME/projects/aur"
 
 ## KEYBINDS
 bindkey -e
-bindkey '\e[A'  history-beginning-search-backward
-bindkey '\e[B'  history-beginning-search-forward
-bindkey '\e[5~' beginning-of-history # PageUp
-bindkey '\e[6~' end-of-history # PageDown
-bindkey '\e[2~' quoted-insert # Ins
-bindkey '\e[3~' delete-char # Del
-bindkey '^H'    backward-kill-word # Del word backward
-# bindkey '^[[3~' kill-word # Del word forward
+bindkey '\e[A'  history-beginning-search-backward # Up
+bindkey '\e[B'  history-beginning-search-forward  # Down
+bindkey '\e[5~' beginning-of-history              # PageUp
+bindkey '\e[6~' end-of-history                    # PageDown
+bindkey '\e[2~' quoted-insert                     # Ins
+bindkey '\e[3~' delete-char                       # Del
 if [[ $TERM == screen-256color ]]; then
     ## tmux
-    bindkey '\eOC' forward-word
-    bindkey '\eOD' backward-word
-    bindkey '\e[1~' beginning-of-line # Home
-    bindkey '\e[4~' end-of-line # End
+    bindkey '\eOC'  forward-word
+    bindkey '\eOD'  backward-word
+    bindkey '\e[1~' beginning-of-line   # Home
+    bindkey '\e[4~' end-of-line         # End
+    bindkey '^H'    backward-kill-word  # C-BS  (delete word backward)
 elif [[ $TERM == rxvt-unicode-256color ]]; then
-    bindkey '\eOc' forward-word
-    bindkey '\eOd' backward-word
-    bindkey '\e[7~' beginning-of-line # Home
-    bindkey '\e[8~' end-of-line # End
+    ## urxvt
+    bindkey '\eOc'  forward-word
+    bindkey '\eOd'  backward-word
+    bindkey '\e[7~' beginning-of-line   # Home
+    bindkey '\e[8~' end-of-line         # End
+    bindkey '^H'    backward-kill-word  # C-BS  (delete word backward)
+    bindkey '^[[3^' kill-word           # C-Del (delete word forward)
 elif [[ $TERM == linux ]]; then
-    bindkey '\e[C' forward-word
-    bindkey '\e[D' backward-word
+    ## linux console
+    bindkey '\e[C'  forward-word
+    bindkey '\e[D'  backward-word
     bindkey '\e[1~' beginning-of-line # Home
-    bindkey '\e[4~' end-of-line # End
+    bindkey '\e[4~' end-of-line       # End
 fi
 
