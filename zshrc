@@ -4,14 +4,10 @@ HISTSIZE=1000
 SAVEHIST=1000
 setopt appendhistory autocd extendedglob nomatch notify
 unsetopt beep
-bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
 
 ## Automatically start/attach tmux session when using ssh
 if [[ -z "$STARTED_TMUX"  && -n "$SSH_TTY" ]]; then
     STARTED_TMUX=1; export STARTED_TMUX
-#    sleep 1
     ( (tmux has-session -t remote && tmux attach-session -t remote) || (tmux new-session -s remote) ) && exit 0
     echo "tmux failed to start"
 fi
@@ -19,12 +15,18 @@ fi
 ## Color for ls
 eval $(dircolors -b ~/config/dircolors-solarized.ansi-universal)
 
+## TAB COMPLETION
+autoload -U zutil
+autoload -Uz compinit
+autoload -U complist
+autoload -U bashcompinit
+compinit
+
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle :compinstall filename '/home/anachron/.zshrc'
 
-autoload -Uz compinit && compinit
-# End of lines added by compinstall
 
+## PROMPT
 autoload -U promptinit && promptinit
 autoload -U colors && colors
 PROMPT="[%{$fg[magenta]%}%M%{$reset_color%}] \
@@ -36,13 +38,13 @@ PATH=$HOME/bin/:$HOME/.cabal/bin:$PATH
 ## ALIASES
 source ~/.aliases
 
-## Set up editor and pager
+## ENVIRONMENT
 EDITOR=vim
 if [[ -n $(type -p vimpager 2>&-) ]]; then
-    PAGER=vimpager
+    export PAGER=vimpager
     alias less='vimpager'
 else
-    PAGER=less
+    export PAGER=less
 fi
 
 BROWSER="firefox"
@@ -52,10 +54,11 @@ ARCH_HASKELL='Bjørnar Hansen <tilbjornar@gmail.com>'
 PKGBUILD_HASKELL_ENABLE_PROFILING=1
 
 ## Opts for owl
-XDG_AUR_HOME="$HOME/projects/aur"
+export XDG_AUR_HOME="$HOME/projects/aur"
 
 
 ## KEYBINDS
+bindkey -e
 bindkey '\e[A'  history-beginning-search-backward
 bindkey '\e[B'  history-beginning-search-forward
 bindkey '\e[1~' beginning-of-line # Home
@@ -72,4 +75,7 @@ if [[ $TERM == screen-256color ]]; then
 elif [[ $TERM == rxvt-unicode-256color ]]; then
     bindkey '\eOc' forward-word
     bindkey '\eOd' backward-word
+elif [[ $TERM == linux ]]; then
+    bindkey '\e[C' forward-word
+    bindkey '\e[D' backward-word
 fi
