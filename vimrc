@@ -19,6 +19,14 @@ set background=dark
 call togglebg#map("<F5>") " for solarized
 colorscheme solarized
 
+set ls=2   " always show status line
+"call Pl#Theme#RemoveSegment('fugitive:branch')
+let g:Powerline_symbols = 'fancy'
+let g:Powerline_colorscheme = 'skwp'
+
+" NERD tree
+nnoremap <F1> :NERDTreeToggle<CR>
+
 " use fast tty
 set ttyfast
 
@@ -29,6 +37,7 @@ set tabstop=4
 set smarttab
 
 set autoindent
+set copyindent
 set smartindent
 set wrap
 
@@ -45,13 +54,37 @@ set nojoinspaces    " Don't double-space after periods (actually does more)
 set incsearch   " Incremental search, search as you type
 set hlsearch    " Highlight all matches
 set ignorecase  " Case-insensitive search
+set smartcase
+
+" Folding
+set foldmethod=indent "fold based on indent
+set foldnestmax=3     "deepest fold is 3 levels
+set nofoldenable      "don't fold by default
+
+set wildmenu
+set wildmode=list:longest
+set title
+set hidden
+let mapleader=","
+set history=1000
+runtime macros/matchit.vim
 
 set number   " Show line numbers
+set showcmd  " Show key presses
+set noshowmode " Mode is shown in statusline
+set cursorline  "Highlight current line
+set list listchars=tab:\ \ ,trail:·
+set scrolloff=8
+
+filetype on
+filetype indent on
+filetype plugin on            " Enable loading plugins for specific file types
+filetype plugin indent on
 set autoread " Reload changed file automatically
 
 
-filetype plugin on            " Enable loading plugins for specific file types
-filetype plugin indent on
+" tex files are latex files
+let g:tex_flavor="latex"
 
 " jump to the last cursor position
 autocmd BufReadPost *
@@ -63,6 +96,8 @@ set grepprg=grep\ -nH\ $*
 
 autocmd BufEnter * lcd %:p:h  " Set work dir to current file's dir
 
+ "" TABs
+let g:TabLineSet_tabnr = 1
 " use omnicompletion for supertab
 "let g:SuperTabDefaultCompletionType = "<C-x><C-o>"
 
@@ -70,7 +105,17 @@ autocmd BufEnter * lcd %:p:h  " Set work dir to current file's dir
 set mouse=a
 
 "**** Keybindings ****
-" for Colemak 
+" toggle paste mode (to paste properly indented text)
+nnoremap <F8> :set invpaste paste?<CR>
+set pastetoggle=<F8>
+
+" un-highlight search term with \<space>
+nmap <silent> <leader><space> :nohlsearch<CR>
+
+nnoremap ' `
+nnoremap ` '
+
+" for Colemak
 noremap u k
 noremap U 5k
 noremap n h
