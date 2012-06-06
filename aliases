@@ -6,7 +6,7 @@ alias Ss='pacman -Ss'
 alias Si='pacman -Si'
 alias Qi='pacman -Qi'
 alias Ql='pacman -Ql'
-alias updatemirrors='sudo reflector -a 8 -l 8 -f 4 --threads 2 --sort rate --save /etc/pacman.d/mirrorlist'
+alias updatemirrors='sudo reflector -l 8 -f 4 --threads 4 --sort rate --save /etc/pacman.d/mirrorlist'
 alias owl='LANG=C owl'
 
 alias svim='sudo -E vim'
