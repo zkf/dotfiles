@@ -11,6 +11,10 @@
 *.ist
 *.lof
 *.lot
+*gnuplottex-fig*.eps
+*gnuplottex-fig*.gnuplot
+*gnuplottex-fig*.tex
+
 
 #
 # Compiled sources #
