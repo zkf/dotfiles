@@ -22,6 +22,8 @@ autoload -U complist
 autoload -U bashcompinit
 compinit
 
+# Disable hostname completion
+zstyle ':completion:*' hosts off
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle :compinstall filename '/home/anachron/.zshrc'
 
@@ -84,8 +86,8 @@ elif [[ $TERM == rxvt-unicode-256color ]]; then
     bindkey '^[[3^' kill-word           # C-Del (delete word forward)
 elif [[ $TERM == linux ]]; then
     ## linux console
-    bindkey '\e[C'  forward-word
-    bindkey '\e[D'  backward-word
+    bindkey '\e[C'  forward-char
+    bindkey '\e[D'  backward-char
     bindkey '\e[1~' beginning-of-line # Home
     bindkey '\e[4~' end-of-line       # End
 fi
