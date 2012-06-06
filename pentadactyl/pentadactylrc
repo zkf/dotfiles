@@ -21,6 +21,8 @@ map -builtin l i
 map -builtin L I
 map -builtin I L
 map -builtin d :tabclose<CR>
+map -builtin <C-e> gt
+map -builtin <C-u> gT
 
 " Show tab numbers
 set guioptions=ns
