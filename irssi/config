@@ -293,6 +293,7 @@ settings = {
     awl_block = "-12";
     tmux_away_repeat = "30";
     tmux_away_message = "I'm not here right now.";
+    neat_colorize = "no";
   };
   "irc/core" = { alternate_nick = "anachron_"; };
 };
