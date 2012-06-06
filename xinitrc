@@ -23,7 +23,7 @@ case ${HOSTNAME} in
               batti &
               skype &
               ;;
-esac &> - # throw away output
+esac >& - # throw away output
 
 # Allow boinc to use GPU
 #xhost local:boinc
