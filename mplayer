@@ -1,0 +1,37 @@
+##################
+# video settings #
+##################
+
+# Specify default video driver (see -vo help for a list).
+vo=x11
+zoom=1
+
+
+#####################
+# subtitle settings #
+#####################
+
+# autoload subtitles
+autosub=yes
+# assume utf8
+utf8=yes
+font=/usr/share/fonts/TTF/DejaVuSans.ttf
+subfont-autoscale=0
+subfont-text-scale=36
+subpos=100
+# prefer subtitle languages
+slang=en,eng,no,nor
+sub-bg-color=0
+ass=0
+ass-color=999999ff
+ass-font-scale=1.5
+ass-use-margins=1
+vf=expand=:::::8/5
+
+
+##################
+# audio settings #
+##################
+
+# prefer audio languages
+alang=en,eng,no,nor
