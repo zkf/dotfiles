@@ -214,6 +214,7 @@ myManageHook = (composeAll
     , className      =? "Tomahawk"           --> doShift ( workspace "mus" )
     , className      =? "Firefox"            --> doShift ( workspace "web" )
     , title          =? "glxgears"           --> doFloat
+    , className      =? "fontforge"          --> doFloat
     , className      =? "St80"               --> doFloat -- MetaEdit+
     , title          =? "MetaEdit+ Startup Launcher"      --> doFloat -- MetaEdit+ (wine)
     , isFullscreen                           --> doFullFloat
