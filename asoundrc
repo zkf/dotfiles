@@ -2,10 +2,8 @@
 defaults.pcm.rate_converter "samplerate_best"
 
 pcm.!default {
-        type plug
-        slave.pcm "headphones"
-        #slave.pcm "dmix"
-        
+    type plug
+    slave.pcm "bs2b"
 }
 
 pcm.skype {
@@ -22,78 +20,28 @@ pcm.skype {
 
 # listplugins
 # analyseplugin bs2b
+# http://bbs.archlinux.org/viewtopic.php?id=95582
 pcm.bs2b {
-	type ladspa
-    #slave.pcm "dmixplug"
-	path "/usr/lib/ladspa"
-	plugins {
-		0 {
-			id 4221  # Bauer stereophonic-to-binaural (4221/bs2b)
-			input {
-				controls [ 700 6 ]
-			}
-		}
-	}
-	# http://bbs.archlinux.org/viewtopic.php?id=95582
-	slave.pcm "plug:dmix"
+    type ladspa
+    slave.pcm "plug:dmix"
+    path "/usr/lib/ladspa"
+    plugins [{
+        label bs2b
+        id 4221  # Bauer stereophonic-to-binaural (4221/bs2b)
+        input {
+            #controls [ 300 1 ]
+            #controls [ 700 6 ]
+            #controls [ 200 9.5 ]
+            controls [ 650 9.5 ]
+        }
+    }]
 }
 
-
-# speaker-test -D headphones -c 2 -t wav
-# audacious uses less CPU when running bs2b as a listed plugin, probably because of samplerate_best
-# Posted at http://bbs.archlinux.org/viewtopic.php?pid=626573#p626573
-pcm.headphones {
-	type rate
-	slave {
-		pcm "plug:bs2b"
-		rate 48000
-	}
-	# Choices: samplerate_best samplerate_medium samplerate samplerate_order samplerate_linear
-	#converter "samplerate_best"
-
+pcm.crossfeed {
+    type plug
+    slave.pcm "bs2b"
     hint {
         show on
-        description "Headphones"
+        description "Crossfeed"
     }
 }
-
-#pcm.dmixplug {
-#    type plug
-#    slave.pcm "dmixed"
-#}
-
-# From https://bugtrack.alsa-project.org/alsa-bug/view.php?id=1853
-# Posted at http://bbs.archlinux.org/viewtopic.php?id=95582
-# Is a dmix that actually works!
-#pcm.dmixed {
-#	type asym
-#	playback.pcm {
-#		# See plugin:dmix at http://www.alsa-project.org/alsa-doc/alsa-lib/pcm_plugins.html
-#		type dmix
-#		ipc_key 5678293
-#		ipc_perm 0660
-#		ipc_gid audio
-#		#rate 48000  # Don't put the rate here! Otherwise it resets the rate & channels set below, as shown by:  cat /proc/asound/card0/pcm0p/sub0/hw_params
-#		slave {
-#			channels 2
-#			pcm {
-#				format S16_LE
-#				rate 44100
-#				type hw
-#				card DX
-#				device 0
-#				subdevice 0
-#			}
-#
-#			# Play with this value, if you get errors "unable to set buffer size" or "underrun occured"
-#			# 4320 is effective minimum with hda-intel, but flash in firefox needs roughly 5000, otherwise flash may be silent.
-#			buffer_size 5000
-#
-#			period_time 0
-#			#period_size 512
-#			#periods 2
-#		}
-#	}
-#    capture.pcm "hw:0"
-#	
-#}
