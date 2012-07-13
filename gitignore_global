@@ -48,4 +48,6 @@
 tags
 vim/spell/*
 vim/.netrwhist
+# for git-svn
+authorsfile
 
