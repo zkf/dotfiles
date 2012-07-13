@@ -9,7 +9,7 @@ alias Ql='pacman -Ql'
 alias updatemirrors='sudo reflector -l 8 -f 4 --threads 4 --sort rate --save /etc/pacman.d/mirrorlist'
 alias owl='LANG=C owl'
 
-alias svim='sudo -E vim'
+alias svim='sudoedit'
 
 alias stop='sudo systemctl poweroff'
 alias restart='sudo systemctl reboot'
