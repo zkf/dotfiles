@@ -6,20 +6,20 @@
 #
 
 ## Start host-specific programs
-case ${HOSTNAME} in 
+case ${HOSTNAME} in
     watson)   skype &
-              mediatomb -l ~/.mediatomb/mediatomb.log &
+              #mediatomb -l ~/.mediatomb/mediatomb.log &
               #minidlna &
               #pms &
               tomahawk &
               firefox &
-              dropboxd & 
+              dropboxd &
               ;;
 
     sherlock) xinput set-prop 12 "Synaptics Coasting Speed" 10 30
               xmodmap ~/.Xmodmap
-              nm-applet & 
-              dropboxd & 
+              nm-applet &
+              dropboxd &
               batti &
               skype &
               ;;
@@ -29,7 +29,7 @@ esac >& - # throw away output
 #xhost local:boinc
 
 # load X settings
-xrdb -load ~/.Xresources 
+xrdb -load ~/.Xresources
 
 # set X cursor
 xsetroot -cursor_name left_ptr
@@ -50,7 +50,7 @@ then
     trayer --transparent true --alpha 0 --tint 0x002b36 --edge top \
         --align right --height 16  --heighttype pixel \
         --widthtype request &
-    exec ck-launch-session dbus-launch --sh-syntax --exit-with-session xmonad
+    exec dbus-launch --sh-syntax --exit-with-session xmonad
 elif [[ xfce4 == ${wm_bin} ]]
 then
     exec startxfce4
