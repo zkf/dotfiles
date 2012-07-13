@@ -3,7 +3,7 @@
 ##################
 
 # Specify default video driver (see -vo help for a list).
-vo=x11
+vo=gl
 zoom=1
 
 
