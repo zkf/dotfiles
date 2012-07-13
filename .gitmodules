@@ -28,3 +28,18 @@
 [submodule "vim/bundle/auctex"]
 	path = vim/bundle/auctex
 	url = https://github.com/vim-scripts/auctex.vim.git
+[submodule "vim/bundle/glsl-highlight"]
+	path = vim/bundle/glsl-highlight
+	url = https://github.com/Nemo157/glsl.vim.git
+[submodule "vim/bundle/tagbar"]
+	path = vim/bundle/tagbar
+	url = git://github.com/majutsushi/tagbar
+[submodule "vim/bundle/vim2hs"]
+	path = vim/bundle/vim2hs
+	url = https://github.com/dag/vim2hs.git
+[submodule "vim/bundle/ghcmod-vim"]
+	path = vim/bundle/ghcmod-vim
+	url = https://github.com/eagletmt/ghcmod-vim.git
+[submodule "vim/bundle/vimproc"]
+	path = vim/bundle/vimproc
+	url = https://github.com/Shougo/vimproc.git

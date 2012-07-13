@@ -8,6 +8,17 @@ set textwidth=79
 set colorcolumn=80
 setlocal formatoptions+=t
 
+au BufWritePost *.hs silent !init-tags %
+au BufWritePost *.hsc silent !init-tags %
+
+autocmd BufWritePost *.hs GhcModCheckAndLintAsync
+map <F7> :GhcModType<CR>
+
+" Disable automatic syntax checking by syntastic
+    let g:syntastic_mode_map = { 'mode': 'passive',
+                               \ 'active_filetypes': [],
+                               \ 'passive_filetypes': []}
+
 syn cluster hsRegions add=hsImport,hsLineComment,hsBlockComment,hsPragma
 syn cluster hsRegions add=cPreCondit,cCppOut,cCppOut2,cCppSkip
 syn cluster hsRegions add=cIncluded,cDefine,cPreProc,cComment,cCppString
