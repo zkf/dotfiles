@@ -18,6 +18,7 @@ utf8=yes
 font=/usr/share/fonts/TTF/DejaVuSans.ttf
 subfont-autoscale=0
 subfont-text-scale=36
+subfont-osd-scale=16
 subpos=100
 # prefer subtitle languages
 slang=en,eng,no,nor
