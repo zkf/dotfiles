@@ -2,7 +2,7 @@
 --
 -- By Bjørnar Hansen <tilbjornar@gmail.com>
 --
--- XMonad version 0.9.2
+-- XMonad version 0.10
 --
 {-- imports --}
 import XMonad hiding ( (|||) )
