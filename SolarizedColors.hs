@@ -1,4 +1,6 @@
 module SolarizedColors where
+base03, base02, base01, base00, base0, base1, base2, base3 :: String
+yellow, orange, red, magenta, violet, blue, cyan, green :: String
 base03  = "#002b36"
 base02  = "#073642"
 base01  = "#586e75"
