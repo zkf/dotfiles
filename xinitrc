@@ -10,7 +10,6 @@ case ${HOSTNAME} in
     watson)   skype &
               #mediatomb -l ~/.mediatomb/mediatomb.log &
               #minidlna &
-              #pms &
               tomahawk &
               firefox &
               dropboxd &
@@ -22,6 +21,7 @@ case ${HOSTNAME} in
               dropboxd &
               batti &
               skype &
+              xscreensaver -no-splash &
               ;;
 esac >& - # throw away output
 
@@ -46,7 +46,6 @@ wm_bin="$1"
 if [[ xmonad == ${wm_bin} ]]
 then
     #cairo-compmgr &
-    xscreensaver -no-splash &
     trayer --transparent true --alpha 0 --tint 0x002b36 --edge top \
         --align right --height 16  --heighttype pixel \
         --widthtype request &
