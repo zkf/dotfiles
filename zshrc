@@ -43,7 +43,7 @@ source ~/.aliases
 
 
 ## ENVIRONMENT
-export PATH=$HOME/bin/:$HOME/.cabal/bin:$PATH
+export PATH=$HOME/bin/:$HOME/.cabal/bin:$HOME/.gem/ruby/1.9.1/bin/:$PATH
 export BROWSER="firefox"
 export EDITOR=vim
 if [[ -n $(type -p vimpager 2>&-) ]]; then
