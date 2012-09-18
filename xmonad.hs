@@ -213,9 +213,8 @@ myManageHook = composeAll
     , className      =? "Firefox"            --> doShift ( workspace "web" )
     , title          =? "glxgears"           --> doFloat
     , title          =? "TSP"                --> doFloat
+    , className      =? ""                   --> doFloat
     , className      =? "fontforge"          --> doFloat
-    , className      =? "St80"               --> doFloat -- MetaEdit+
-    , title          =? "MetaEdit+ Startup Launcher"      --> doFloat -- MetaEdit+ (wine)
     , isFullscreen                           --> doFullFloat
     ] <+> manageDocks
     where workspace wsName = fromMaybe "1" $ M.lookup wsName wsNameToId
