@@ -1,26 +1,40 @@
-"2.3.1 (created: 2010/04/07 18:56:53)
+" vim: set ft=vim:
 
-noremap h <Nop>
-noremap H <Nop>
-noremap n 3h
-noremap k n
-noremap N H
-noremap K N
-noremap e 3j
-noremap E <C-d>
-noremap u 3k
-noremap U <C-u>
-noremap j u
-noremap i 3l
-noremap l i
-noremap L I
-noremap I L
+set runtimepath=/home/anachron/.vimperator
+"source! /home/anachron/.vimperatorrc.local
 
 " Show tab numbers
 set tabnumbers
 
-set runtimepath=/home/anachron/.vimperator
-source! /home/anachron/.vimperatorrc.local
+"Smooth scrolling
+let g:smooziee_scroll_amount="60"
+let g:smooziee_scroll_interval="30"
+" clear default mappings
 
-" vim: set ft=vim:
 set gui=none,tabs
+
+" goto gmail
+map gm :tabopen gmail.com<CR>
+
+" close download statusbar
+map C :js _dlbar_clearAll()<CR>
+
+" Regular keymap for colemak
+map h <Nop>
+map H <Nop>
+map n <left><left><left><left>
+noremap k n
+noremap N H
+noremap K N
+map e <down><down><down>
+map E <down><down><down><down><down><down><down><down><down>
+map u <up><up><up>
+map U <up><up><up><up><up><up><up><up><up>
+noremap j u
+map i <right><right><right><right>
+noremap l i
+noremap L I
+noremap I L
+map <C-e> gt
+map <C-u> gT
+
