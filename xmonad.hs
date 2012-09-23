@@ -53,7 +53,7 @@ fontDroidSansMono = "xft:Droid Sans Mono Dotted:size = 14"
 background, foreground, border :: String
 background = Color.base03
 foreground = Color.base0
-border     = Color.green
+border     = Color.orange
 
 myFocusedBorderColor, myNormalBorderColor :: String
 myFocusedBorderColor = border
@@ -90,7 +90,7 @@ myPP h = defaultPP
         ppUrgent          = dzenColor background Color.red . dzenStrip . pad . wsName,
         ppSep             = dzenColor Color.base01 "" "¦",
         ppWsSep           = "",
-        ppTitle           = dzenColor Color.violet "" . pad . shorten 100,
+        ppTitle           = dzenColor Color.orange "" . pad . shorten 100,
         ppOutput          = hPutStrLn h
         -- ppExtras = logLoad : L.date ("^pa(1250)^bg() %a, %b %d ^fg(white)%H:%M^fg()") : []
     }
@@ -177,8 +177,8 @@ myKeys conf = mkKeymap conf $
         ("M-C-u" , sendMessage Expand) ,
 
         -- Screenshot
-        ("<Print>"  , spawn "scrot"),
-        ("C-<Print>", spawn "sleep 0.2; scrot -s"),
+        ("<Print>"  , spawn "scrot '%Y-%m-%d_%H:%M:%S_$wx$h.png' -e 'mv $f ~/screenshots/'"),
+        ("C-<Print>", spawn "sleep 0.2; scrot -s '%Y-%m-%d_%H:%M:%S_$wx$h.png' -e 'mv $f ~/screenshots/'"),
 
         -- Lock screen
         ("M-z"   , spawn "xscreensaver-command -lock"),
@@ -215,6 +215,7 @@ myManageHook = composeAll
     , title          =? "TSP"                --> doFloat
     , className      =? ""                   --> doFloat
     , className      =? "fontforge"          --> doFloat
+    , className      =? "MPlayer"            --> doFloat
     , isFullscreen                           --> doFullFloat
     ] <+> manageDocks
     where workspace wsName = fromMaybe "1" $ M.lookup wsName wsNameToId
@@ -254,14 +255,14 @@ main = do
     xmonad $ withUrgencyHook NoUrgencyHook defaultConfig    -- xmonad $ ewmh defaultconfig
         {
             handleEventHook    = fullscreenEventHook,
-            borderWidth        = 2,
+            borderWidth        = 4,
             normalBorderColor  = myNormalBorderColor,
             focusedBorderColor = myFocusedBorderColor,
 
             keys        = myKeys,
             layoutHook  = myLayoutHook,
             logHook     = myLogHook dzpipe,
-            manageHook  = manageHook defaultConfig <+> myManageHook,
+            manageHook  = myManageHook,
             modMask     = mod4Mask,
             startupHook = setWMName "LG3D",
             terminal    = "urxvt",
