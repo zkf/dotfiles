@@ -11,13 +11,15 @@ setlocal formatoptions+=t
 au BufWritePost *.hs silent !init-tags %
 au BufWritePost *.hsc silent !init-tags %
 
-autocmd BufWritePost *.hs GhcModCheckAndLintAsync
-map <F7> :GhcModType<CR>
+"autocmd BufWritePost *.hs GhcModCheckAndLintAsync
+"map <F7> :GhcModType<CR>
 
-" Disable automatic syntax checking by syntastic
-    let g:syntastic_mode_map = { 'mode': 'passive',
+" Enable automatic syntax checking by syntastic
+    let g:syntastic_mode_map = { 'mode': 'active',
                                \ 'active_filetypes': [],
                                \ 'passive_filetypes': []}
+
+let g:hdevtools_options = '-g-isrc -g-Wall'
 
 syn cluster hsRegions add=hsImport,hsLineComment,hsBlockComment,hsPragma
 syn cluster hsRegions add=cPreCondit,cCppOut,cCppOut2,cCppSkip
