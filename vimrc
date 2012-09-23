@@ -1,9 +1,66 @@
-" pathogen makes it easy to install plugins etc.
-call pathogen#infect()
-call pathogen#helptags()
+" setup vundle
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+" --- Bundles ---
+
+"" Helpers
+Bundle 'gmarik/vundle'
+Bundle 'tpope/vim-fugitive'
+Bundle 'bitc/vim-hdevtools'
+
+"" Themes, colours etc.
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'skammer/vim-css-color'
+Bundle 'yurifury/hexHighlight'
+
+"" Completion etc.
+Bundle 'Shougo/neocomplcache'
+Bundle 'scrooloose/syntastic'
+Bundle 'SirVer/ultisnips'
+
+"" Language specific
+Bundle 'ujihisa/neco-ghc'
+Bundle 'eagletmt/ghcmod-vim'
+Bundle 'dag/vim2hs'
+Bundle 'auctex.vim'
+Bundle 'tikhomirov/vim-glsl'
+
+"" UI / UX
+Bundle 'scrooloose/nerdtree'
+Bundle 'majutsushi/tagbar'
+Bundle 'Lokaltog/vim-powerline'
+
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'kana/vim-textobj-indent'
+Bundle 'kana/vim-textobj-user'
+Bundle 'wincent/Command-T'
+Bundle 'godlygeek/tabular'
+
+"" Deps for other bundle
+" for neocomplcache
+Bundle 'Shougo/vimproc'
+" for vim-textobj-user
+Bundle 'kana/vim-textobj-user'
+
+" --- end bundles ---
+filetype plugin indent on
+
+
 
 " Use neocomplcache
 let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enahle_smart_case            = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion   = 1
+let g:neocomplcache_min_syntax_length            = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\v(\.md|\.txt)'
+
 " Tab navigation in popup
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
