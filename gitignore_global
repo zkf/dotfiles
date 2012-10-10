@@ -22,11 +22,14 @@
 *.o
 *.so
 *.hi
+Main
+dist/
 
 # Log files etc. #
 ##################
 *.log
 *.prof
+*.hp
 
 # Compressed files #
 ####################
@@ -45,9 +48,12 @@
 # Miscellaneous #
 #################
 *.pdf
+*.ps
 tags
 vim/spell/*
 vim/.netrwhist
 # for git-svn
 authorsfile
+# Vensim
+*.2mdl
 
