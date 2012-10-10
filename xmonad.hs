@@ -50,14 +50,27 @@ fontInconsolata = "xft:Inconsolata:size=19"
 fontDroidSansMono :: String
 fontDroidSansMono = "xft:Droid Sans Mono Dotted:size = 14"
 
-background, foreground, border :: String
-background = Color.base03
-foreground = Color.base0
+dark :: Bool
+dark = True
+
+background, foreground, border, secondary, emphasis :: String
+(background, foreground, secondary, emphasis) =
+    if dark
+        then ( Color.background Color.solarizedDark
+             , Color.primaryContent Color.solarizedDark
+             , Color.secondaryContent Color.solarizedDark
+             , Color.emphasizedContent Color.solarizedDark
+             )
+        else ( Color.background Color.solarizedLight
+             , Color.primaryContent Color.solarizedLight
+             , Color.secondaryContent Color.solarizedLight
+             , Color.emphasizedContent Color.solarizedLight
+             )
 border     = Color.orange
 
 myFocusedBorderColor, myNormalBorderColor :: String
 myFocusedBorderColor = border
-myNormalBorderColor  = Color.base01
+myNormalBorderColor  = secondary
 
 dzenFont, dzenBgColor, dzenFgColor :: String
 dzenFont    = drop 4 fontInconsolata  --dzen does not support `xft:` when xmonad launches it
@@ -71,7 +84,7 @@ myShellPrompt = defaultXPConfig
                 font              = fontInconsolata,
                 bgColor           = background,
                 fgColor           = foreground,
-                fgHLight          = Color.base03,
+                fgHLight          = background,
                 bgHLight          = Color.yellow,
                 borderColor       = border,
                 promptBorderWidth = 2,
@@ -83,18 +96,18 @@ myShellPrompt = defaultXPConfig
 -- Pretty printing for logHook
 myPP :: Handle -> PP
 myPP h = defaultPP
-    {   ppCurrent         = \wsId -> dzenColor Color.base03 (ppMultiColor wsId) . pad $ wsName wsId,
+    {   ppCurrent         = \wsId -> dzenColor background (ppMultiColor wsId) . pad $ wsName wsId,
         ppHidden          = pad . (\wsId ->  dzenColor (ppMultiColor wsId) "" (wsName wsId)),
-        ppHiddenNoWindows = dzenColor Color.base01 "" . pad . wsName,
+        ppHiddenNoWindows = dzenColor secondary "" . pad . wsName,
         ppLayout          = dzenColor foreground "" . pad,
         ppUrgent          = dzenColor background Color.red . dzenStrip . pad . wsName,
-        ppSep             = dzenColor Color.base01 "" "¦",
+        ppSep             = dzenColor secondary "" "¦",
         ppWsSep           = "",
         ppTitle           = dzenColor Color.orange "" . pad . shorten 100,
         ppOutput          = hPutStrLn h
         -- ppExtras = logLoad : L.date ("^pa(1250)^bg() %a, %b %d ^fg(white)%H:%M^fg()") : []
     }
-    where ppMultiColor wsId = fromMaybe Color.base1 (M.lookup wsId wsColorMap)
+    where ppMultiColor wsId = fromMaybe emphasis (M.lookup wsId wsColorMap)
           wsName wsId = case M.lookup wsId wsNameMap of
                                 Nothing    -> wsId
                                 Just name  -> wsId ++ ":" ++ name
@@ -247,7 +260,7 @@ statusBarCmd = "dzen2" ++
                " -fg '" ++ dzenFgColor ++ "'" ++
                " -sa c" ++
                " -fn '" ++ dzenFont ++ "'" ++
-               " -h 16 -x 0 -y 0 -ta l -e 'onstart=lower'"
+               " -x 0 -y 0 -ta l -e 'onstart=lower'"
 
 main :: IO ()
 main = do
