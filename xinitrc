@@ -5,23 +5,33 @@
 # Executed by startx (run your window manager from here)
 #
 
-## Start host-specific programs
+## Do host-specific things
 case ${HOSTNAME} in
-    watson)   skype &
+    watson)   # start some programs
+              skype &
               #mediatomb -l ~/.mediatomb/mediatomb.log &
               #minidlna &
               tomahawk &
               firefox &
               dropboxd &
+
+              # Generate a new background
+              WP=/tmp/wall.png
+              (~/bin/vladswallpaper $WP && habak -hi $WP) &
               ;;
 
-    sherlock) xinput set-prop 12 "Synaptics Coasting Speed" 10 30
+    sherlock) # start some programs
+              xinput set-prop 12 "Synaptics Coasting Speed" 10 30
               xmodmap ~/.Xmodmap
               nm-applet &
               dropboxd &
               batti &
               skype &
               xscreensaver -no-splash &
+
+              # Generate a new background
+              WP=/tmp/wall.png
+              (~/bin/fortunewall $WP && habak -hi $WP) &
               ;;
 esac >& - # throw away output
 
@@ -37,9 +47,6 @@ xsetroot -cursor_name left_ptr
 # Speed up key repeating
 xset r rate 250
 
-# Generate a new background
-WP=/tmp/wall.png
-(~/bin/fortunewall $WP && habak -hi $WP) &
 
 wm_bin="$1"
 
