@@ -24,3 +24,4 @@ alias periscope='periscope --language=en'
 alias irc="ssh -C bjorh08@login.uia.no -t '. .bash_profile; . .bashrc; tmux -2 a -t svale'"
 
 alias vensim="wine /home/anachron/.wine/drive_c/Program\ Files/Vensim/Venple.exe"
+alias leftovers='sudo -E owl leftovers'
