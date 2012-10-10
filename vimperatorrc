@@ -5,6 +5,8 @@ set runtimepath=/home/anachron/.vimperator
 
 " Show tab numbers
 set tabnumbers
+" hide scrollbars
+set scrollbars=false
 
 "Smooth scrolling
 let g:smooziee_scroll_amount="60"
