@@ -26,7 +26,7 @@ import XMonad.Prompt.Shell
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks   -- avoidstruts
 import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.DynamicLog hiding (xmobar, xmobarPP, xmobarColor, sjanssenPP, byorgeyPP)
+import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.UrgencyHook
 
@@ -45,7 +45,7 @@ import Data.Monoid (Endo)
 
 -- define some fonts
 fontInconsolata :: String
-fontInconsolata = "xft:Inconsolata:size=19"
+fontInconsolata = "xft:Inconsolata:size=12"
 
 fontDroidSansMono :: String
 fontDroidSansMono = "xft:Droid Sans Mono Dotted:size = 14"
@@ -112,6 +112,24 @@ myPP h = defaultPP
                                 Nothing    -> wsId
                                 Just name  -> wsId ++ ":" ++ name
 
+myXmobarPP :: Handle -> PP
+myXmobarPP h = defaultPP
+    {   ppCurrent         = \wsId -> xmobarColor Color.base03 (ppMultiColor wsId) . pad $ wsName wsId,
+        ppHidden          = pad . (\wsId ->  xmobarColor (ppMultiColor wsId) "" (wsName wsId)),
+        ppHiddenNoWindows = xmobarColor Color.base01 "" . pad . wsName,
+        ppLayout          = xmobarColor foreground "" . pad,
+        ppUrgent          = xmobarColor background Color.red . xmobarStrip . pad . wsName,
+        ppSep             = xmobarColor Color.base01 "" "¦",
+        ppWsSep           = "",
+        ppTitle           = xmobarColor Color.orange "" . pad . shorten 100,
+        ppOutput          = hPutStrLn h
+        -- ppExtras = logLoad : L.date ("^pa(1250)^bg() %a, %b %d ^fg(white)%H:%M^fg()") : []
+    }
+    where ppMultiColor wsId = fromMaybe Color.base1 (M.lookup wsId wsColorMap)
+          wsName wsId = case M.lookup wsId wsNameMap of
+                                Nothing    -> wsId
+                                Just name  -> wsId ++ ":" ++ name
+-- { ppOutput = hPutStrLn xmproc, ppTitle = xmobarColor "green" "" . shorten 50}
 
 {-- Workspaces --}
 
@@ -156,6 +174,7 @@ myKeys conf = mkKeymap conf $
         ("<XF86AudioRaiseVolume>", spawn "/home/anachron/bin/dvol.sh -i 2")  ,
         ("<XF86AudioMute>"       , spawn "/home/anachron/bin/dvol.sh -t")    ,
         ("<XF86Tools>"           , spawn "amixer set 'Front Panel' toggle")  ,
+        ("<XF86TouchpadToggle>"  , spawn "/home/anachron/bin/trackpad-toggle")  ,
 
         -- Layout
         ("M-\\" , sendMessage NextLayout)      ,
@@ -254,6 +273,10 @@ myLogHook :: Handle -> X ()
 myLogHook dzpipe =
         dynamicLogWithPP (myPP dzpipe) >> updatePointer (Relative 0.95 0.95)
 
+myXmobar :: Handle -> X ()
+myXmobar xmproc =
+    dynamicLogWithPP (myXmobarPP xmproc)
+
 statusBarCmd :: String
 statusBarCmd = "dzen2" ++
                " -bg '" ++ dzenBgColor ++ "'" ++
@@ -265,6 +288,7 @@ statusBarCmd = "dzen2" ++
 main :: IO ()
 main = do
     dzpipe <- spawnPipe statusBarCmd
+    -- xmproc <- spawnPipe "xmobar"
     xmonad $ withUrgencyHook NoUrgencyHook defaultConfig    -- xmonad $ ewmh defaultconfig
         {
             handleEventHook    = fullscreenEventHook,
@@ -274,6 +298,7 @@ main = do
 
             keys        = myKeys,
             layoutHook  = myLayoutHook,
+            -- logHook     = myXmobar xmproc,
             logHook     = myLogHook dzpipe,
             manageHook  = myManageHook,
             modMask     = mod4Mask,

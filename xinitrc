@@ -33,6 +33,12 @@ case ${HOSTNAME} in
               WP=/tmp/wall.png
               (~/bin/fortunewall $WP && habak -hi $WP) &
               ;;
+
+    lestrade) skype &
+              firefox &
+              dropboxd &
+              nm-applet &
+              ;;
 esac >& - # throw away output
 
 # Allow boinc to use GPU
@@ -49,12 +55,13 @@ xset r rate 250
 
 
 wm_bin="$1"
+wm_bin="xmonad"
 
 if [[ xmonad == ${wm_bin} ]]
 then
     #cairo-compmgr &
     trayer --transparent true --alpha 0 --tint 0x002b36 --edge top \
-        --align right --height 16  --heighttype pixel \
+        --align right --heighttype pixel \
         --widthtype request &
     exec dbus-launch --sh-syntax --exit-with-session xmonad
 elif [[ xfce4 == ${wm_bin} ]]
