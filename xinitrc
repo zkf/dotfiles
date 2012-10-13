@@ -14,6 +14,7 @@ case ${HOSTNAME} in
               tomahawk &
               firefox &
               dropboxd &
+              xcompmgr &
 
               # Generate a new background
               WP=/tmp/wall.png
