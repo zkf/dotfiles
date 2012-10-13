@@ -1,1 +1,1 @@
-xchatnickcolor.pl
+../xchatnickcolor.pl
