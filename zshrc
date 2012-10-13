@@ -33,7 +33,6 @@ autoload -U promptinit && promptinit
 autoload -U colors && colors
 PROMPT="[%{$fg[magenta]%}%M%{$reset_color%}] \
 %{$fg[green]%}%n %{$fg[blue]%}%~%{$fg[yellow]%}$%{$reset_color%} "
-BATTERY=1
 
 source /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
