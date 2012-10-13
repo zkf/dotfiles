@@ -1,4 +1,2 @@
-Xft.dpi: 141
-
-URxvt.font:         xft:Inconsolata:size=19
-URxvt.boldFont:     xft:Inconsolata:size=19
+URxvt.font:         xft:Inconsolata-12
+URxvt.boldFont:     xft:Inconsolata-12

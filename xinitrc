@@ -46,7 +46,8 @@ esac >& - # throw away output
 
 # load X settings
 xrdb -load ~/.Xresources
-[[ -e "~/config/Xresources-$HOSTNAME" ]] && xrdb -merge ~/config/Xresources-$HOSTNAME
+Xres_local="$HOME/config/Xresources-$HOSTNAME"
+[[ -e $Xres_local ]] && xrdb -merge $Xres_local
 
 # set X cursor
 xsetroot -cursor_name left_ptr
