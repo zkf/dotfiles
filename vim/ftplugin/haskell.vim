@@ -8,8 +8,8 @@ set textwidth=79
 set colorcolumn=80
 setlocal formatoptions+=t
 
-au BufWritePost *.hs silent !init-tags %
-au BufWritePost *.hsc silent !init-tags %
+" au BufWritePost *.hs silent !init-tags %
+" au BufWritePost *.hsc silent !init-tags %
 
 "autocmd BufWritePost *.hs GhcModCheckAndLintAsync
 "map <F7> :GhcModType<CR>
