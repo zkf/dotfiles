@@ -129,7 +129,7 @@ runtime macros/matchit.vim
 set number   " Show line numbers
 set showcmd  " Show key presses
 set noshowmode " Mode is shown in statusline
-set cursorline  "Highlight current line
+" set cursorline  "Highlight current line
 set list listchars=tab:\ \ ,trail:·
 set scrolloff=8
 
