@@ -32,8 +32,8 @@ URxvt.urgentOnBell:     true
 URxvt.visualBell:       false
 
 ! font settings
-URxvt.font:         xft:Inconsolata:size=19, xft:Consolas:size=19, xft:Dejavu Sans Mono:size=16
-URxvt.boldFont:     xft:Inconsolata:size=19, xft:Consolas:size=19, xft:Dejavu Sans Mono:size=16
+URxvt.font:         xft:Inconsolata:size=12, xft:Consolas:size=12, xft:Dejavu Sans Mono:size=12
+URxvt.boldFont:     xft:Inconsolata:size=12, xft:Consolas:size=12, xft:Dejavu Sans Mono:size=12
 !URxvt.font:        -*-droid sans mono dotted-*-*-*-*-*-*-*-*-*-*-*-u
 !URxvt.font:        xft:Droid Sans Mono Dotted:size=9:antialias=true
 !URxvt.font:        xft:Inconsolata-g:size=10:style=g:

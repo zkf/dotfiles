@@ -33,6 +33,7 @@ autoload -U promptinit && promptinit
 autoload -U colors && colors
 PROMPT="[%{$fg[magenta]%}%M%{$reset_color%}] \
 %{$fg[green]%}%n %{$fg[blue]%}%~%{$fg[yellow]%}$%{$reset_color%} "
+BATTERY=1
 
 source /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
@@ -58,7 +59,7 @@ export ARCH_HASKELL='Bjørnar Hansen <tilbjornar@gmail.com>'
 export PKGBUILD_HASKELL_ENABLE_PROFILING=1
 
 ## Opts for owl
-export XDG_AUR_HOME="$HOME/projects/aur"
+export XDG_AUR_HOME="$HOME/.aur"
 
 
 ## KEYBINDS

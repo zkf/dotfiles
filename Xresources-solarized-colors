@@ -36,14 +36,25 @@
 #define S_cyan          #2aa198
 #define S_green         #859900
 
-*background:            S_base03
-URxvt.background:       [80]#002b36
-*foreground:            S_base0
+
+! Dark solarized
+/* *background:            S_base03 */
+/* *foreground:            S_base0 */
+/* *fadeColor:             S_base03 */
+/* *cursorColor:           S_base1 */
+/* *pointerColorBackground:S_base01 */
+/* *pointerColorForeground:S_base1 */
+
+! Light solarized
+*background:            S_base3
+*foreground:            S_base00
+*fadeColor:             S_base3
+*cursorColor:           S_base01
+*pointerColorBackground:S_base1
+*pointerColorForeground:S_base01
+
 *fading:                40
-*fadeColor:             S_base03
-*cursorColor:           S_base1
-*pointerColorBackground:S_base01
-*pointerColorForeground:S_base1
+URxvt.background:       [80]#fdf6e3
 
 !! black dark/light
 *color0:                S_base02
