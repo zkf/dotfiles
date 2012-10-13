@@ -25,7 +25,7 @@ URxvt.scrollBar_floating: true
 
 URxvt.perl-ext-common:  default,matcher
 URxvt.urlLauncher:      /usr/bin/firefox
-URxvt.matcher.button:   1 
+URxvt.matcher.button:   1
 
 URxvt.urgentOnBell:     true
 ! Prevent annoying flash on backspace etc.
@@ -41,7 +41,6 @@ URxvt.boldFont:     xft:Inconsolata:size=19, xft:Consolas:size=19, xft:Dejavu Sa
 !URxvt.font:        xft:envy code r:size=12
 !URxvt.font:        -*-droid sans mono dotted-*-*-*-*-*-*-*-*-*-*-*-u
 !URxvt.font:        xft:Terminus:size=12
-!URxvt.boldFont:    
 URxvt.letterSpace: -2
 
 ! key mappings
