@@ -51,7 +51,7 @@ fontDroidSansMono :: String
 fontDroidSansMono = "xft:Droid Sans Mono Dotted:size = 14"
 
 dark :: Bool
-dark = True
+dark = False
 
 background, foreground, border, secondary, emphasis :: String
 (background, foreground, secondary, emphasis) =
@@ -114,18 +114,18 @@ myPP h = defaultPP
 
 myXmobarPP :: Handle -> PP
 myXmobarPP h = defaultPP
-    {   ppCurrent         = \wsId -> xmobarColor Color.base03 (ppMultiColor wsId) . pad $ wsName wsId,
+    {   ppCurrent         = \wsId -> xmobarColor background (ppMultiColor wsId) . pad $ wsName wsId,
         ppHidden          = pad . (\wsId ->  xmobarColor (ppMultiColor wsId) "" (wsName wsId)),
-        ppHiddenNoWindows = xmobarColor Color.base01 "" . pad . wsName,
+        ppHiddenNoWindows = xmobarColor secondary "" . pad . wsName,
         ppLayout          = xmobarColor foreground "" . pad,
         ppUrgent          = xmobarColor background Color.red . xmobarStrip . pad . wsName,
-        ppSep             = xmobarColor Color.base01 "" "¦",
+        ppSep             = xmobarColor secondary "" "¦",
         ppWsSep           = "",
         ppTitle           = xmobarColor Color.orange "" . pad . shorten 100,
         ppOutput          = hPutStrLn h
         -- ppExtras = logLoad : L.date ("^pa(1250)^bg() %a, %b %d ^fg(white)%H:%M^fg()") : []
     }
-    where ppMultiColor wsId = fromMaybe Color.base1 (M.lookup wsId wsColorMap)
+    where ppMultiColor wsId = fromMaybe emphasis (M.lookup wsId wsColorMap)
           wsName wsId = case M.lookup wsId wsNameMap of
                                 Nothing    -> wsId
                                 Just name  -> wsId ++ ":" ++ name
@@ -285,10 +285,16 @@ statusBarCmd = "dzen2" ++
                " -fn '" ++ dzenFont ++ "'" ++
                " -x 0 -y 0 -ta l -e 'onstart=lower'"
 
+xmobarCmd :: String
+xmobarCmd = "xmobar " ++
+            "-B '" ++ background ++ "' " ++
+            "-F '" ++ foreground ++ "' " ++
+            "-f '" ++ "-*-terminus-*-*-*-*-18-*-*-*-*-*-*-*" ++ "' "
+
 main :: IO ()
 main = do
-    dzpipe <- spawnPipe statusBarCmd
-    -- xmproc <- spawnPipe "xmobar"
+    --dzpipe <- spawnPipe statusBarCmd
+    xmproc <- spawnPipe xmobarCmd
     xmonad $ withUrgencyHook NoUrgencyHook defaultConfig    -- xmonad $ ewmh defaultconfig
         {
             handleEventHook    = fullscreenEventHook,
@@ -298,8 +304,8 @@ main = do
 
             keys        = myKeys,
             layoutHook  = myLayoutHook,
-            -- logHook     = myXmobar xmproc,
-            logHook     = myLogHook dzpipe,
+            logHook     = myXmobar xmproc,
+            -- logHook     = myLogHook dzpipe,
             manageHook  = myManageHook,
             modMask     = mod4Mask,
             startupHook = setWMName "LG3D",

@@ -72,7 +72,7 @@ set dir=~/.tmp
 
 " Color settings
 syntax enable
-set background=dark
+set background=light
 call togglebg#map("<F5>") " for solarized
 colorscheme solarized
 

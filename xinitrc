@@ -54,6 +54,9 @@ xsetroot -cursor_name left_ptr
 # Speed up key repeating
 xset r rate 250
 
+xset +fp /usr/share/fonts/local/
+xset fp rehash
+
 
 wm_bin="$1"
 wm_bin="xmonad"
@@ -61,9 +64,9 @@ wm_bin="xmonad"
 if [[ xmonad == ${wm_bin} ]]
 then
     #cairo-compmgr &
-    trayer --transparent true --alpha 0 --tint 0x002b36 --edge top \
-        --align right --heighttype pixel \
-        --widthtype request &
+    trayer --transparent true --alpha 0 --tint 0xfdf6e3 --edge top \
+        --align right --heighttype pixel --height 22 \
+        --widthtype percent --width 5 &
     exec dbus-launch --sh-syntax --exit-with-session xmonad
 elif [[ xfce4 == ${wm_bin} ]]
 then
