@@ -243,6 +243,7 @@ myManageHook = composeAll
     , className      =? "Spotify"            --> doShift ( workspace "mus" )
     , className      =? "Tomahawk"           --> doShift ( workspace "mus" )
     , className      =? "Firefox"            --> doShift ( workspace "web" )
+    , title          =? "Firefox Preferences"--> doFloat
     , title          =? "glxgears"           --> doFloat
     , title          =? "TSP"                --> doFloat
     , className      =? ""                   --> doFloat
