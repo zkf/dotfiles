@@ -55,7 +55,7 @@ fi
 
 ## Opts for cabal2arch
 export ARCH_HASKELL='Bjørnar Hansen <tilbjornar@gmail.com>'
-export PKGBUILD_HASKELL_ENABLE_PROFILING=1
+#export PKGBUILD_HASKELL_ENABLE_PROFILING=1
 
 ## Opts for owl
 export XDG_AUR_HOME="$HOME/.aur"
