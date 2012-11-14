@@ -14,6 +14,8 @@ case ${HOSTNAME} in
               tomahawk &
               firefox &
               dropboxd &
+              xcompmgr -D 6 -C -f &
+              dunst &
 
               # Generate a new background
               WP=/tmp/wall.png
@@ -64,7 +66,6 @@ wm_bin="xmonad"
 
 if [[ xmonad == ${wm_bin} ]]
 then
-    #cairo-compmgr &
     trayer --transparent true --alpha 0 --tint 0xfdf6e3 --edge top \
         --align right --heighttype pixel --height 22 \
         --widthtype percent --width 5 &

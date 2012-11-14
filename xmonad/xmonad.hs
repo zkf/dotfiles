@@ -19,6 +19,7 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.IM
 import XMonad.Layout.Grid
 import XMonad.Layout.WindowNavigation
+import XMonad.Layout.PerWorkspace
 
 import XMonad.Prompt
 import XMonad.Prompt.Shell
@@ -33,6 +34,8 @@ import XMonad.Hooks.UrgencyHook
 import XMonad.Actions.UpdatePointer
 import XMonad.Actions.CopyWindow
 import XMonad.Actions.SinkAll
+import XMonad.Actions.Volume
+import XMonad.Actions.CycleWS
 
 import qualified Data.Map         as M
 import qualified XMonad.StackSet  as W
@@ -49,6 +52,9 @@ fontInconsolata = "xft:Inconsolata:size=12"
 
 fontDroidSansMono :: String
 fontDroidSansMono = "xft:Droid Sans Mono Dotted:size = 14"
+
+fontTerminus :: String
+fontTerminus = "-*-terminus-*-*-*-*-18-*-*-*-*-*-*-*"
 
 dark :: Bool
 dark = False
@@ -81,7 +87,7 @@ dzenFgColor = foreground
 myShellPrompt :: XPConfig
 myShellPrompt = defaultXPConfig
         {
-                font              = fontInconsolata,
+                font              = fontTerminus,
                 bgColor           = background,
                 fgColor           = foreground,
                 fgHLight          = background,
@@ -170,11 +176,12 @@ myKeys conf = mkKeymap conf $
         ("M-<F12>"      , spawn "/home/anachron/bin/udsks.sh") ,
 
         -- Multimedia keys
-        ("<XF86AudioLowerVolume>", spawn "/home/anachron/bin/dvol.sh -d 2")  ,
-        ("<XF86AudioRaiseVolume>", spawn "/home/anachron/bin/dvol.sh -i 2")  ,
-        ("<XF86AudioMute>"       , spawn "/home/anachron/bin/dvol.sh -t")    ,
-        ("<XF86Tools>"           , spawn "amixer set 'Front Panel' toggle")  ,
+        ("<XF86AudioLowerVolume>", lowerVolume 4 >> return ()) ,
+        ("<XF86AudioRaiseVolume>", raiseVolume 4 >> return ()) ,
+        ("<XF86AudioMute>"       , toggleMute >> return ())     ,
+        ("<XF86Tools>"           , spawn "/home/anachron/bin/headphones-toggle"),
         ("<XF86TouchpadToggle>"  , spawn "/home/anachron/bin/trackpad-toggle")  ,
+        ("<XF86HomePage>"        , spawn "/usr/bin/xbmc"),
 
         -- Layout
         ("M-\\" , sendMessage NextLayout)      ,
@@ -217,7 +224,11 @@ myKeys conf = mkKeymap conf $
 
         -- Quit or reload XMonad
         ("M-S-q" , io exitSuccess),
-        ("M-q"   , broadcastMessage ReleaseResources >> restart "xmonad" True)
+        ("M-q"   , broadcastMessage ReleaseResources >> restart "xmonad" True),
+
+        -- next / previous screen
+        ("M-w"   , nextScreen),
+        ("M-f"   , prevScreen)
     ]
     ++
     -- "M-[1..9,0,-]" -- Switch to workspace N
@@ -225,11 +236,11 @@ myKeys conf = mkKeymap conf $
     -- "M-C-[1..9,0,-]" -- Copy client to workspace N
     [("M-" ++ m ++ k, windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) myWorkspaces
-        , (f, m) <- [ (W.greedyView, ""), (W.shift, "S-"), (copy, "C-") ]
+        , (f, m) <- [ (W.view, ""), (W.shift, "S-"), (copy, "C-") ]
     ]
     ++
     -- "M-C-S-[1..9,0,-]" -- Move client to workspace N and follow
-    [("M-C-S-" ++ k, windows (W.shift i) >> windows (W.greedyView i))
+    [("M-C-S-" ++ k, windows (W.shift i) >> windows (W.view i))
         | (i, k) <- zip (XMonad.workspaces conf) myWorkspaces
     ]
 
@@ -243,11 +254,16 @@ myManageHook = composeAll
     , className      =? "Spotify"            --> doShift ( workspace "mus" )
     , className      =? "Tomahawk"           --> doShift ( workspace "mus" )
     , className      =? "Firefox"            --> doShift ( workspace "web" )
+    , title          =? "Firefox Preferences"--> doFloat
     , title          =? "glxgears"           --> doFloat
     , title          =? "TSP"                --> doFloat
     , className      =? ""                   --> doFloat
     , className      =? "fontforge"          --> doFloat
     , className      =? "MPlayer"            --> doFloat
+    , className      =? "Steam"              --> doFloat
+    , title          =? "Steam"              --> doFloat
+    , className      =? "Gnuplot"            --> doFloat
+    , className      =? "feh"                --> doFloat
     , isFullscreen                           --> doFullFloat
     ] <+> manageDocks
     where workspace wsName = fromMaybe "1" $ M.lookup wsName wsNameToId
@@ -259,10 +275,11 @@ myLayoutHook =  avoidStruts
                 . toggleLayouts (noBorders Full)
                 . smartBorders
                 . layoutHintsToCenter
+                . onWorkspace "3" imLayout
                 $ myLayouts
                 where
                     myLayouts   = tiled ||| Mirror tiled ||| Grid
-                                   ||| withIM 0.22 isSkype Grid
+                    imLayout = withIM 0.22 isSkype Grid
                     isSkype = Or (Title "anachron88 - Skype™")(Title "Skype™ 2.1 (Beta) for Linux")
                     tiled       = Tall nmaster delta ratio
                     nmaster     = 1
@@ -289,13 +306,13 @@ xmobarCmd :: String
 xmobarCmd = "xmobar " ++
             "-B '" ++ background ++ "' " ++
             "-F '" ++ foreground ++ "' " ++
-            "-f '" ++ "-*-terminus-*-*-*-*-18-*-*-*-*-*-*-*" ++ "' "
+            "-f '" ++ fontTerminus ++ "' "
 
 main :: IO ()
 main = do
     --dzpipe <- spawnPipe statusBarCmd
     xmproc <- spawnPipe xmobarCmd
-    xmonad $ withUrgencyHook NoUrgencyHook defaultConfig    -- xmonad $ ewmh defaultconfig
+    xmonad $ withUrgencyHookC myUrgencyHook myUrgencyConfig $ defaultConfig
         {
             handleEventHook    = fullscreenEventHook,
             borderWidth        = 4,
@@ -312,4 +329,6 @@ main = do
             terminal    = "urxvt",
             workspaces  = myWorkspaces
         }
+  where myUrgencyHook = SpawnUrgencyHook "~/.xmonad/urgentHook"
+        myUrgencyConfig = urgencyConfig {remindWhen = Every (minutes 1)}
 
