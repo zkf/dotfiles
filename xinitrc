@@ -40,6 +40,10 @@ case ${HOSTNAME} in
               firefox &
               dropboxd &
               nm-applet &
+              udiskie &
+              xcompmgr -D 6 -C -f &
+              dunst &
+              (sleep 2 && alock -auth pam -bg shade:90) &
               ;;
 esac >& - # throw away output
 
