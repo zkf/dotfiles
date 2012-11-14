@@ -1,0 +1,10 @@
+#!/bin/bash
+
+NAME=$(xprop -id $1 '\n$0' "WM_NAME" | tail -1 | sed 's/"\(.*\)"/\1/')
+CLASS=$(xprop -id $1 '\n$0' "WM_CLASS" | tail -1 | sed 's/"\(.*\)"/\1/')
+
+sleep 3;
+
+if (xprop -id $1 | grep -q "The urgency hint bit is set" >/dev/null) ; then 
+    notify-send -i "$CLASS" "$NAME" "needs your attention"
+fi
