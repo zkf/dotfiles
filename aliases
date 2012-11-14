@@ -11,8 +11,8 @@ alias owl='LANG=C owl'
 
 alias svim='sudoedit'
 
-alias stop='sudo systemctl poweroff'
-alias restart='sudo systemctl reboot'
+alias stop='systemctl poweroff'
+alias restart='systemctl reboot'
 
 alias grep='grep --color=auto'
 alias ls='ls --color=auto -F --group-directories-first'
