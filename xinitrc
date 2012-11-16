@@ -43,7 +43,8 @@ case ${HOSTNAME} in
               udiskie &
               xcompmgr -D 6 -C -f &
               dunst &
-              (sleep 2 && alock -auth pam -bg shade:90) &
+              (sleep 2 && alock -auth pam -bg shade:50) &
+              xbindkeys
               ;;
 esac >& - # throw away output
 
