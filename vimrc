@@ -146,9 +146,6 @@ let g:tex_flavor="latex"
 " *.md files are markdown, not modula2
 autocmd BufNewFile,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
     \ set filetype=markdown
-" Use pandoc for compilation
-autocmd BufWritePost *.markdown,*.md,*.mdown,*.mkd,*.mkdn
-    \ silent !pandoc <afile> -o <afile>:r.pdf
 
 " jump to the last cursor position
 autocmd BufReadPost *
