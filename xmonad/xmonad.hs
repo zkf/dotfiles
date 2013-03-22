@@ -6,6 +6,7 @@
 --
 {-- imports --}
 import XMonad hiding ( (|||) )
+import Data.Char (isSpace)
 import System.Exit
 import System.IO (Handle)
 
@@ -23,6 +24,8 @@ import XMonad.Layout.PerWorkspace
 
 import XMonad.Prompt
 import XMonad.Prompt.Shell
+import XMonad.Prompt.Input
+
 
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks   -- avoidstruts
@@ -94,7 +97,7 @@ myShellPrompt = defaultXPConfig
                 bgHLight          = Color.yellow,
                 borderColor       = border,
                 promptBorderWidth = 2,
-                position          = Top,
+                position          = Bottom,
                 height            = 24,
                 defaultText       = ""
         }
@@ -137,6 +140,15 @@ myXmobarPP h = defaultPP
                                 Just name  -> wsId ++ ":" ++ name
 -- { ppOutput = hPutStrLn xmproc, ppTitle = xmobarColor "green" "" . shorten 50}
 
+
+calcPrompt :: XPConfig -> String -> X ()
+calcPrompt c ans =
+    inputPrompt c (trim ans) ?+ \input ->
+        liftIO(runProcessWithInput "qalc" [input] "") >>= calcPrompt c
+    where
+        trim  = f . f
+            where f = reverse . dropWhile isSpace
+
 {-- Workspaces --}
 
 myWorkspaces :: [WorkspaceId]
@@ -173,15 +185,17 @@ myKeys conf = mkKeymap conf $
         -- Spawn applications
         ("M-S-<Return>" , spawn $ XMonad.terminal conf)        ,
         ("M-l"          , shellPrompt myShellPrompt)           ,
+        ("M-<KP_Multiply>"          , calcPrompt  myShellPrompt "qalc")   ,
         ("M-<F12>"      , spawn "/home/anachron/bin/udsks.sh") ,
 
         -- Multimedia keys
-        ("<XF86AudioLowerVolume>", lowerVolume 4 >> return ()) ,
-        ("<XF86AudioRaiseVolume>", raiseVolume 4 >> return ()) ,
-        ("<XF86AudioMute>"       , toggleMute >> return ())     ,
+        ("<XF86AudioLowerVolume>", spawn "ponymix -d0 decrease 5"),
+        ("<XF86AudioRaiseVolume>", spawn "ponymix -d0 increase 5"),
+        ("<XF86AudioMute>"       , spawn "ponymix -d0 toggle"),
         ("<XF86Tools>"           , spawn "/home/anachron/bin/headphones-toggle"),
         ("<XF86TouchpadToggle>"  , spawn "/home/anachron/bin/trackpad-toggle")  ,
         ("<XF86HomePage>"        , spawn "/usr/bin/xbmc"),
+        ("<XF86LaunchA>"         , spawn "/home/anachron/bin/dualhead"),
 
         -- Layout
         ("M-\\" , sendMessage NextLayout)      ,
@@ -193,7 +207,7 @@ myKeys conf = mkKeymap conf $
         ("M-c" , kill1),
         ("M-f" , withFocused $ windows . W.sink),
         ("M-S-f", sinkAll),
-        ("M-k"  , spawn "/usr/bin/xcalib -invert -alter") ,
+        ("M-k"  , spawn "/home/anachron/bin/invertx"),
 
         -- Move focus
         ("M-n" , sendMessage $ Go L) ,
@@ -223,12 +237,12 @@ myKeys conf = mkKeymap conf $
         ("M-z"   , spawn "xscreensaver-command -lock"),
 
         -- Quit or reload XMonad
-        ("M-S-q" , io exitSuccess),
-        ("M-q"   , broadcastMessage ReleaseResources >> restart "xmonad" True),
+        ("M-S-<Escape>" , io exitSuccess),
+        ("M-<Escape>"   , broadcastMessage ReleaseResources >> restart "xmonad" True),
 
         -- next / previous screen
         ("M-w"   , nextScreen),
-        ("M-f"   , prevScreen)
+        ("M-S-w" , swapNextScreen)
     ]
     ++
     -- "M-[1..9,0,-]" -- Switch to workspace N
@@ -258,15 +272,21 @@ myManageHook = composeAll
     , title          =? "glxgears"           --> doFloat
     , title          =? "TSP"                --> doFloat
     , className      =? ""                   --> doFloat
+    , resource       =? "sun-awt-X11-XFramePeer" --> doFloat
+    , resource       =? "explorer.exe"       --> doFloat
     , className      =? "fontforge"          --> doFloat
     , className      =? "MPlayer"            --> doFloat
     , className      =? "Steam"              --> doFloat
     , title          =? "Steam"              --> doFloat
     , className      =? "Gnuplot"            --> doFloat
     , className      =? "feh"                --> doFloat
+    , className      =? "XVroot"             --> doFloat
+    , className      =? "Pavucontrol"        --> doFloat
+    , className      =? "xbmc.bin"           --> doFullFloat
     , isFullscreen                           --> doFullFloat
     ] <+> manageDocks
     where workspace wsName = fromMaybe "1" $ M.lookup wsName wsNameToId
+
 
 myLayoutHook =  avoidStruts
                 -- . windowNavigation
@@ -288,7 +308,7 @@ myLayoutHook =  avoidStruts
 
 myLogHook :: Handle -> X ()
 myLogHook dzpipe =
-        dynamicLogWithPP (myPP dzpipe) >> updatePointer (Relative 0.95 0.95)
+        dynamicLogWithPP (myPP dzpipe)
 
 myXmobar :: Handle -> X ()
 myXmobar xmproc =
@@ -302,17 +322,19 @@ statusBarCmd = "dzen2" ++
                " -fn '" ++ dzenFont ++ "'" ++
                " -x 0 -y 0 -ta l -e 'onstart=lower'"
 
-xmobarCmd :: String
-xmobarCmd = "xmobar " ++
-            "-B '" ++ background ++ "' " ++
-            "-F '" ++ foreground ++ "' " ++
-            "-f '" ++ fontTerminus ++ "' "
+xmobarCmd :: Int -> String
+xmobarCmd scr = "xmobar " ++
+                "-B '" ++ background ++ "' " ++
+                "-F '" ++ foreground ++ "' " ++
+                "-f '" ++ fontTerminus ++ "' " ++
+                "-x " ++ show scr
 
 main :: IO ()
 main = do
     --dzpipe <- spawnPipe statusBarCmd
-    xmproc <- spawnPipe xmobarCmd
-    xmonad $ withUrgencyHookC myUrgencyHook myUrgencyConfig $ defaultConfig
+    xmproc0 <- spawnPipe $ xmobarCmd 0
+    xmproc1 <- spawnPipe $ xmobarCmd 1
+    xmonad $ withUrgencyHookC myUrgencyHook myUrgencyConfig $ ewmh defaultConfig
         {
             handleEventHook    = fullscreenEventHook,
             borderWidth        = 4,
@@ -321,7 +343,9 @@ main = do
 
             keys        = myKeys,
             layoutHook  = myLayoutHook,
-            logHook     = myXmobar xmproc,
+            logHook     = myXmobar xmproc0
+                            >> myXmobar xmproc1
+                            >> updatePointer (Relative 0.99 0.99),
             -- logHook     = myLogHook dzpipe,
             manageHook  = myManageHook,
             modMask     = mod4Mask,
