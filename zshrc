@@ -43,7 +43,7 @@ source ~/.aliases
 
 
 ## ENVIRONMENT
-export PATH=$HOME/bin/:$HOME/.cabal/bin:$HOME/.gem/ruby/1.9.1/bin/:$PATH
+export PATH=$HOME/bin:$HOME/.cabal/bin:$HOME/.gem/ruby/1.9.1/bin:$PATH
 export BROWSER="firefox"
 export EDITOR=vim
 if [[ -n $(type -p vimpager 2>&-) ]]; then
@@ -58,7 +58,7 @@ export ARCH_HASKELL='Bjørnar Hansen <tilbjornar@gmail.com>'
 #export PKGBUILD_HASKELL_ENABLE_PROFILING=1
 
 ## Opts for owl
-export XDG_AUR_HOME="$HOME/.aur"
+export OWL_AUR_HOME="$HOME/.aur"
 
 
 ## KEYBINDS
