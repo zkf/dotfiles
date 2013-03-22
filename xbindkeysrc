@@ -1,2 +1,5 @@
 "~/bin/dualhead"
     m:0x0 + c:248
+
+"qdbus org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 PlayPause"
+    XF86AudioPlay
