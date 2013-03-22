@@ -13,7 +13,7 @@ Bundle 'bitc/vim-hdevtools'
 
 "" Themes, colours etc.
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'skammer/vim-css-color'
+Bundle 'ap/vim-css-color'
 Bundle 'yurifury/hexHighlight'
 
 "" Completion etc.
@@ -79,7 +79,8 @@ colorscheme solarized
 set ls=2   " always show status line
 "call Pl#Theme#RemoveSegment('fugitive:branch')
 let g:Powerline_symbols = 'fancy'
-let g:Powerline_colorscheme = 'skwp'
+let g:Powerline_theme = 'default'
+let g:Powerline_colorscheme = 'solarized'
 
 " NERD tree
 nnoremap <F1> :NERDTreeToggle<CR>
@@ -155,7 +156,7 @@ autocmd BufReadPost *
 
 set grepprg=grep\ -nH\ $*
 
-autocmd BufEnter * lcd %:p:h  " Set work dir to current file's dir
+"autocmd BufEnter * lcd %:p:h  " Set work dir to current file's dir
 
  "" TABs
 let g:TabLineSet_tabnr = 1
