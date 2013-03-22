@@ -36,15 +36,18 @@ case ${HOSTNAME} in
               (~/bin/fortunewall $WP && habak -hi $WP) &
               ;;
 
-    lestrade) skype &
+    lestrade)
+              skype &
               firefox &
               dropboxd &
               nm-applet &
               udiskie &
-              xcompmgr -D 6 -C -f &
+              # xcompmgr -D 6 -C -f &
               dunst &
-              (sleep 2 && alock -auth pam -bg shade:50) &
+              (sleep 0.5 && alock -auth pam -bg shade:50) &
               xbindkeys
+              xmodmap ~/.Xmodmap
+              xsetroot -solid black
               ;;
 esac >& - # throw away output
 
@@ -74,7 +77,7 @@ then
     trayer --transparent true --alpha 0 --tint 0xfdf6e3 --edge top \
         --align right --heighttype pixel --height 22 \
         --widthtype percent --width 5 &
-    exec dbus-launch --sh-syntax --exit-with-session xmonad
+    exec xmonad
 elif [[ xfce4 == ${wm_bin} ]]
 then
     exec startxfce4
