@@ -5,3 +5,5 @@
 	excludesfile = /home/anachron/config/gitignore_global
 [credential]
 	helper = cache --timeout=3600
+[push]
+	default = simple
