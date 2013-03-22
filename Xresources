@@ -1,5 +1,6 @@
 ! ------ CURSOR
 Xcursor.theme: Vanilla-DMZ-AA
+Xcursor.size:  16
 
 !! ----- COLORS -----
 #include "Xresources-solarized-colors"
@@ -15,7 +16,7 @@ URxvt.scrollBar_right: true
 URxvt.scrollBar_floating: true
 
 URxvt.perl-ext-common:  default,matcher
-URxvt.urlLauncher:      /usr/bin/firefox
+URxvt.urlLauncher:      /usr/bin/xdg-open
 URxvt.matcher.button:   1
 
 URxvt.urgentOnBell:     true
@@ -23,13 +24,12 @@ URxvt.urgentOnBell:     true
 URxvt.visualBell:       false
 
 ! font settings
-!URxvt.font:        -*-droid sans mono dotted-*-*-*-*-*-*-*-*-*-*-*-u
+!URxvt.font:        -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
 !URxvt.font:        xft:Droid Sans Mono Dotted:size=9:antialias=true
 !URxvt.font:        xft:Inconsolata-g:size=10:style=g:
-!URxvt.font:        -*-dina-medium-r-*-*-12-*-*-*-*-*-*-* 
 !URxvt.font:        xft:envy code r:size=12
-!URxvt.font:        -*-droid sans mono dotted-*-*-*-*-*-*-*-*-*-*-*-u
 !URxvt.font:        xft:Terminus:size=12
+URxvt.font:        xft:DejaVu Sans Mono:size=11
 URxvt.letterSpace: -2
 
 ! key mappings
