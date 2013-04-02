@@ -60,6 +60,8 @@ export ARCH_HASKELL='Bjørnar Hansen <tilbjornar@gmail.com>'
 ## Opts for owl
 export OWL_AUR_HOME="$HOME/.aur"
 
+## Opts for java
+export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
 
 ## KEYBINDS
 bindkey -e
