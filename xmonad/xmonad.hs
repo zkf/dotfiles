@@ -15,7 +15,7 @@ import XMonad.Util.EZConfig
 
 import XMonad.Layout.LayoutCombinators
 import XMonad.Layout.LayoutHints
-import XMonad.Layout.ToggleLayouts
+import qualified XMonad.Layout.ToggleLayouts as TL
 import XMonad.Layout.NoBorders
 import XMonad.Layout.IM
 import XMonad.Layout.Grid
@@ -189,9 +189,9 @@ myKeys conf = mkKeymap conf $
         ("M-<F12>"      , spawn "/home/anachron/bin/udsks.sh") ,
 
         -- Multimedia keys
-        ("<XF86AudioLowerVolume>", spawn "ponymix -d0 decrease 5"),
-        ("<XF86AudioRaiseVolume>", spawn "ponymix -d0 increase 5"),
-        ("<XF86AudioMute>"       , spawn "ponymix -d0 toggle"),
+        ("<XF86AudioLowerVolume>", spawn . ponymix $ Decrease volumeStep),
+        ("<XF86AudioRaiseVolume>", spawn . ponymix $ Increase volumeStep),
+        ("<XF86AudioMute>"       , spawn $ ponymix Toggle),
         ("<XF86Tools>"           , spawn "/home/anachron/bin/headphones-toggle"),
         ("<XF86TouchpadToggle>"  , spawn "/home/anachron/bin/trackpad-toggle")  ,
         ("<XF86HomePage>"        , spawn "/usr/bin/xbmc"),
@@ -199,7 +199,7 @@ myKeys conf = mkKeymap conf $
 
         -- Layout
         ("M-\\" , sendMessage NextLayout)      ,
-        ("M-m"  , sendMessage $ Toggle "Full") ,
+        ("M-m"  , sendMessage $ TL.Toggle "Full") ,
         ("M-,"  , sendMessage $ IncMasterN 1),
         ("M-."  , sendMessage $ IncMasterN (-1)),
 
@@ -258,6 +258,16 @@ myKeys conf = mkKeymap conf $
         | (i, k) <- zip (XMonad.workspaces conf) myWorkspaces
     ]
 
+  where ponymix cmd = "ponymix -c0 " ++ show cmd
+        volumeStep = 5
+
+data PonymixCmd = Decrease Int | Increase Int | Toggle
+instance Show PonymixCmd where
+    show (Decrease step) = "decrease " ++ show step
+    show (Increase step) = "increase " ++ show step
+    show Toggle          = "toggle"
+
+
 {--  Hooks --}
 
 myManageHook :: Query (Endo WindowSet)
@@ -292,7 +302,7 @@ myLayoutHook =  avoidStruts
                 -- . windowNavigation
                 -- . configurableNavigation (navigateColor  myNormalBorderColor)
                 . configurableNavigation (navigateBrightness 0.0 )
-                . toggleLayouts (noBorders Full)
+                . TL.toggleLayouts (noBorders Full)
                 . smartBorders
                 . layoutHintsToCenter
                 . onWorkspace "3" imLayout
