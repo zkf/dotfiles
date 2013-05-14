@@ -16,8 +16,9 @@ URxvt.scrollBar_right: true
 URxvt.scrollBar_floating: true
 
 URxvt.perl-ext-common:  default,matcher
-URxvt.urlLauncher:      /usr/bin/xdg-open
+URxvt.url-launcher:      /usr/bin/firefox
 URxvt.matcher.button:   1
+URxvt.colorUL: #4682B4
 
 URxvt.urgentOnBell:     true
 ! Prevent annoying flash on backspace etc.
@@ -26,10 +27,10 @@ URxvt.visualBell:       false
 ! font settings
 !URxvt.font:        -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
 !URxvt.font:        xft:Droid Sans Mono Dotted:size=9:antialias=true
-!URxvt.font:        xft:Inconsolata-g:size=10:style=g:
+URxvt.font:        xft:Inconsolata-g:size=12:style=g:
 !URxvt.font:        xft:envy code r:size=12
 !URxvt.font:        xft:Terminus:size=12
-URxvt.font:        xft:DejaVu Sans Mono:size=11
+!URxvt.font:        xft:DejaVu Sans Mono:size=10
 URxvt.letterSpace: -2
 
 ! key mappings
