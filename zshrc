@@ -29,10 +29,15 @@ zstyle :compinstall filename '/home/anachron/.zshrc'
 
 
 ## PROMPT
-autoload -U promptinit && promptinit
+autoload -Uz promptinit && promptinit
 autoload -U colors && colors
-PROMPT="[%{$fg[magenta]%}%M%{$reset_color%}] \
-%{$fg[green]%}%n %{$fg[blue]%}%~%{$fg[yellow]%}$%{$reset_color%} "
+# PROMPT="[%{$fg[magenta]%}%M%{$reset_color%}] \
+# %{$fg[green]%}%n %{$fg[blue]%}%~%{$fg[yellow]%}$%{$reset_color%} "
+prompt grml-large
+zstyle ':prompt:grml-large:*:items:user' pre '%F{green}'
+zstyle ':prompt:grml-large:*:items:host' pre '%F{magenta}'
+zstyle ':prompt:grml-large:*:items:path' pre '%F{blue}'
+zstyle ':prompt:grml-large:*:items:percent' pre '%F{yellow}'
 
 source /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
@@ -43,7 +48,7 @@ source ~/.aliases
 
 
 ## ENVIRONMENT
-export PATH=$HOME/bin:$HOME/.cabal/bin:$HOME/.gem/ruby/1.9.1/bin:$PATH
+export PATH=$HOME/.cabal/bin:$HOME/.gem/ruby/1.9.1/bin:$PATH
 export BROWSER="firefox"
 export EDITOR=vim
 if [[ -n $(type -p vimpager 2>&-) ]]; then
@@ -62,6 +67,9 @@ export OWL_AUR_HOME="$HOME/.aur"
 
 ## Opts for java
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
+
+## Opts for steam
+export STEAM_FRAME_FORCE_CLOSE=1
 
 ## KEYBINDS
 bindkey -e
