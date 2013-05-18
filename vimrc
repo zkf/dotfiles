@@ -17,12 +17,13 @@ Bundle 'ap/vim-css-color'
 Bundle 'yurifury/hexHighlight'
 
 "" Completion etc.
-Bundle 'Shougo/neocomplcache'
+" Bundle 'Shougo/neocomplcache'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'SirVer/ultisnips'
 
 "" Language specific
-Bundle 'ujihisa/neco-ghc'
+" Bundle 'ujihisa/neco-ghc'
 Bundle 'eagletmt/ghcmod-vim'
 Bundle 'dag/vim2hs'
 Bundle 'auctex.vim'
@@ -33,6 +34,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'majutsushi/tagbar'
 Bundle 'Lokaltog/vim-powerline'
 
+Bundle 'Raimondi/delimitMate'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-repeat'
@@ -51,6 +53,9 @@ Bundle 'kana/vim-textobj-user'
 " --- end bundles ---
 filetype plugin indent on
 
+" source .vimrc from current directory
+set exrc
+" set secure
 
 
 " Use neocomplcache
@@ -208,3 +213,4 @@ map <C-n> <C-W><Left>
 map <C-i> <C-W><Right>
 
 
+let g:hdevtools_options = '-g -hide-package -g GLFW'
