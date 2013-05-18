@@ -37,6 +37,7 @@ case ${HOSTNAME} in
               ;;
 
     lestrade)
+              pulseaudio --start
               skype &
               firefox &
               dropboxd &
@@ -76,7 +77,7 @@ if [[ xmonad == ${wm_bin} ]]
 then
     trayer --transparent true --alpha 0 --tint 0xfdf6e3 --edge top \
         --align right --heighttype pixel --height 22 \
-        --widthtype percent --width 5 &
+        --widthtype percent --width 7 &
     exec xmonad
 elif [[ xfce4 == ${wm_bin} ]]
 then
