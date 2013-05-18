@@ -28,6 +28,7 @@ import XMonad.Prompt.Input
 
 
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.ManageDocks   -- avoidstruts
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.DynamicLog
@@ -353,7 +354,8 @@ main = do
 
             keys        = myKeys,
             layoutHook  = myLayoutHook,
-            logHook     = myXmobar xmproc0
+            logHook     = fadeInactiveLogHook 0.8
+                            >> myXmobar xmproc0
                             >> myXmobar xmproc1
                             >> updatePointer (Relative 0.99 0.99),
             -- logHook     = myLogHook dzpipe,
