@@ -3,3 +3,12 @@
 
 "qdbus org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 PlayPause"
     XF86AudioPlay
+
+"/usr/bin/asus-kbd-backlight up"
+    m:0x10 + c:238
+        Mod2 + XF86KbdBrightnessUp
+
+"/usr/bin/asus-kbd-backlight down"
+    m:0x10 + c:237
+        Mod2 + XF86KbdBrightnessDown
+
