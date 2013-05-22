@@ -5,10 +5,44 @@
     XF86AudioPlay
 
 "/usr/bin/asus-kbd-backlight up"
-    m:0x10 + c:238
-        Mod2 + XF86KbdBrightnessUp
+    Mod2 + XF86KbdBrightnessUp
 
 "/usr/bin/asus-kbd-backlight down"
-    m:0x10 + c:237
-        Mod2 + XF86KbdBrightnessDown
+    Mod2 + XF86KbdBrightnessDown
+
+"~/bin/exx xbmc"
+    Mod2 + XF86Tools
+
+"~/bin/exx xbmc"
+    m:0x10 + c:148
+
+"~/bin/invertx"
+    Mod4 + k
+
+"~/bin/udsks.sh"
+    Mod4 + F12
+
+"ponymix -c0 toggle"
+    XF86AudioMute
+
+"ponymix -c0 decrease 5"
+    XF86AudioLowerVolume
+
+"ponymix -c0 increase 5"
+    XF86AudioRaiseVolume
+
+"~/bin/headphones-toggle"
+    XF86HomePage
+
+"~/bin/trackpad-toggle"
+    XF86TouchpadToggle
+
+"urxvt"
+    Mod4 + Return
+
+"scrot %Y-%m-%d_%H:%M:%S_\$wx\$h.png -e "mv \$f ~/screenshots/""
+    Print
+
+"sleep 0.2; scrot -s %Y-%m-%d_%H:%M:%S_\$wx\$h.png -e "mv \$f ~/screenshots/""
+    m:0x14 + c:107
 

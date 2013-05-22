@@ -183,20 +183,11 @@ wsColorMap =
 myKeys :: XConfig l -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf = mkKeymap conf $
     [
-        -- Spawn applications
         ("M-S-<Return>" , spawn $ XMonad.terminal conf)        ,
+
+        -- Prompts
         ("M-l"          , shellPrompt myShellPrompt)           ,
         ("M-<KP_Multiply>"          , calcPrompt  myShellPrompt "qalc")   ,
-        ("M-<F12>"      , spawn "/home/anachron/bin/udsks.sh") ,
-
-        -- Multimedia keys
-        ("<XF86AudioLowerVolume>", spawn . ponymix $ Decrease volumeStep),
-        ("<XF86AudioRaiseVolume>", spawn . ponymix $ Increase volumeStep),
-        ("<XF86AudioMute>"       , spawn $ ponymix Toggle),
-        ("<XF86Tools>"           , spawn "/home/anachron/bin/headphones-toggle"),
-        ("<XF86TouchpadToggle>"  , spawn "/home/anachron/bin/trackpad-toggle")  ,
-        ("<XF86HomePage>"        , spawn "/usr/bin/xbmc"),
-        ("<XF86LaunchA>"         , spawn "/home/anachron/bin/dualhead"),
 
         -- Layout
         ("M-\\" , sendMessage NextLayout)      ,
@@ -208,7 +199,6 @@ myKeys conf = mkKeymap conf $
         ("M-c" , kill1),
         ("M-f" , withFocused $ windows . W.sink),
         ("M-S-f", sinkAll),
-        ("M-k"  , spawn "/home/anachron/bin/invertx"),
 
         -- Move focus
         ("M-n" , sendMessage $ Go L) ,
@@ -229,13 +219,6 @@ myKeys conf = mkKeymap conf $
         -- Resize master area
         ("M-C-e" , sendMessage Shrink) ,
         ("M-C-u" , sendMessage Expand) ,
-
-        -- Screenshot
-        ("<Print>"  , spawn "scrot '%Y-%m-%d_%H:%M:%S_$wx$h.png' -e 'mv $f ~/screenshots/'"),
-        ("C-<Print>", spawn "sleep 0.2; scrot -s '%Y-%m-%d_%H:%M:%S_$wx$h.png' -e 'mv $f ~/screenshots/'"),
-
-        -- Lock screen
-        ("M-z"   , spawn "xscreensaver-command -lock"),
 
         -- Quit or reload XMonad
         ("M-S-<Escape>" , io exitSuccess),
@@ -258,15 +241,6 @@ myKeys conf = mkKeymap conf $
     [("M-C-S-" ++ k, windows (W.shift i) >> windows (W.view i))
         | (i, k) <- zip (XMonad.workspaces conf) myWorkspaces
     ]
-
-  where ponymix cmd = "ponymix -c0 " ++ show cmd
-        volumeStep = 5
-
-data PonymixCmd = Decrease Int | Increase Int | Toggle
-instance Show PonymixCmd where
-    show (Decrease step) = "decrease " ++ show step
-    show (Increase step) = "increase " ++ show step
-    show Toggle          = "toggle"
 
 
 {--  Hooks --}
@@ -362,6 +336,7 @@ main = do
             manageHook  = myManageHook,
             modMask     = mod4Mask,
             startupHook = setWMName "LG3D",
+            terminal    = "urxvt",
             workspaces  = myWorkspaces
         }
   where myUrgencyHook = SpawnUrgencyHook "~/.xmonad/urgentHook"
