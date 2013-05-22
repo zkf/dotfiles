@@ -1,17 +1,27 @@
+" tex files are latex files
+let g:tex_flavor="latex"
 
-set textwidth=0
+setlocal textwidth=0
 "set formatoptions+=wa
-set wrap linebreak
-let &showbreak="`-> "
+setlocal wrap linebreak nolist
+let &l:showbreak="`-> "
 
 " TODO toggle spell check with hotkey
-set nospell
+setlocal nospell
 
 " word count on F3
-map <F3> :w !detex \| wc -w<CR>
+map <buffer> <F3> :w !detex \| wc -w<CR>
 
 " settings for vim-latex (latex-suite)
 "set sw=2
-set iskeyword+=:
-let g:Tex_SmartKeyQuote=0
+setlocal iskeyword+=:
+let Tex_SmartKeyQuote=1
+
+imap <buffer> .<Space> .<CR>
+noremap <buffer> e gj
+noremap <buffer> u gk
+noremap <buffer> E 5gj
+noremap <buffer> U 5gk
+
+command -buffer  Make latexmk -pdf -outdir=build report.pdf
 

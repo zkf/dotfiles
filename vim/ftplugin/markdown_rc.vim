@@ -1,16 +1,16 @@
 
-set textwidth=0
-set wrapmargin=0
+setlocal textwidth=0
+setlocal wrapmargin=0
 "set formatoptions+=wa
-set wrap linebreak
+setlocal wrap linebreak
 "let &showbreak="└─"
-set nolist
+setlocal nolist
 
 " TODO toggle spell check with hotkey
-set nospell
+setlocal nospell
 
 " word count on F3
-map <F3> :w !wc -w<CR>
+map-local <F3> :w !wc -w<CR>
 
 " Use pandoc for compilation
 " autocmd BufWritePost *.markdown,*.md,*.mdown,*.mkd,*.mkdn 

@@ -18,6 +18,7 @@ Bundle 'yurifury/hexHighlight'
 
 "" Completion etc.
 " Bundle 'Shougo/neocomplcache'
+Bundle 'Raimondi/delimitMate'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'SirVer/ultisnips'
@@ -28,13 +29,13 @@ Bundle 'eagletmt/ghcmod-vim'
 Bundle 'dag/vim2hs'
 Bundle 'auctex.vim'
 Bundle 'tikhomirov/vim-glsl'
+Bundle 'rbonvall/vim-textobj-latex'
 
 "" UI / UX
 Bundle 'scrooloose/nerdtree'
 Bundle 'majutsushi/tagbar'
 Bundle 'Lokaltog/vim-powerline'
 
-Bundle 'Raimondi/delimitMate'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-repeat'
@@ -43,6 +44,7 @@ Bundle 'kana/vim-textobj-indent'
 Bundle 'kana/vim-textobj-user'
 Bundle 'wincent/Command-T'
 Bundle 'godlygeek/tabular'
+Bundle 'VOoM'
 
 "" Deps for other bundle
 " for neocomplcache
@@ -56,19 +58,28 @@ filetype plugin indent on
 " source .vimrc from current directory
 set exrc
 " set secure
+"
+
 
 
 " Use neocomplcache
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enahle_smart_case            = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion   = 1
-let g:neocomplcache_min_syntax_length            = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\v(\.md|\.txt)'
+" let g:neocomplcache_enable_at_startup = 1
+" let g:neocomplcache_enahle_smart_case            = 1
+" let g:neocomplcache_enable_camel_case_completion = 1
+" let g:neocomplcache_enable_underbar_completion   = 1
+" let g:neocomplcache_min_syntax_length            = 3
+" let g:neocomplcache_lock_buffer_name_pattern = '\v(\.md|\.txt)'
 
 " Tab navigation in popup
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+let g:ycm_key_list_previous_completion=['<Up>']
+" imap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<Plug>delimitMateS-Tab"
+
+"" Ultisnips
+let g:UltiSnipsExpandTrigger='<F6>'
+let g:UltiSnipsListSnippets='<C-S-Tab>'
+
+
 
 " Put backups and swap files in ~/.tmp
 set backup
@@ -109,6 +120,7 @@ set wrap
 " nmap <S-Tab> <<
 " imap <S-Tab> <Esc><<i
 
+
 set linebreak       " Wrap long lines at the chars found in 'breakat'
 "set textwidth=79   " Max length of lines
 set nojoinspaces    " Don't double-space after periods (actually does more)
@@ -139,15 +151,8 @@ set noshowmode " Mode is shown in statusline
 set list listchars=tab:\ \ ,trail:·
 set scrolloff=8
 
-filetype on
-filetype indent on
-filetype plugin on            " Enable loading plugins for specific file types
-filetype plugin indent on
 set autoread " Reload changed file automatically
 
-
-" tex files are latex files
-let g:tex_flavor="latex"
 
 " *.md files are markdown, not modula2
 autocmd BufNewFile,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
