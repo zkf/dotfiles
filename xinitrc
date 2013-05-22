@@ -49,6 +49,8 @@ case ${HOSTNAME} in
               xbindkeys
               xmodmap ~/.Xmodmap
               xsetroot -solid black
+              compton --backend glx --paint-on-overlay --glx-no-stencil \
+                  --vsync opengl-swc --config ~/config/compton.conf -b &
               ;;
 esac >& - # throw away output
 

@@ -348,7 +348,7 @@ main = do
     xmonad $ withUrgencyHookC myUrgencyHook myUrgencyConfig $ ewmh defaultConfig
         {
             handleEventHook    = fullscreenEventHook,
-            borderWidth        = 4,
+            borderWidth        = 0,
             normalBorderColor  = myNormalBorderColor,
             focusedBorderColor = myFocusedBorderColor,
 
@@ -362,7 +362,6 @@ main = do
             manageHook  = myManageHook,
             modMask     = mod4Mask,
             startupHook = setWMName "LG3D",
-            terminal    = "urxvt",
             workspaces  = myWorkspaces
         }
   where myUrgencyHook = SpawnUrgencyHook "~/.xmonad/urgentHook"
