@@ -5,6 +5,8 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
 " --- Bundles ---
+"
+Bundle "live-latex-preview"
 
 "" Helpers
 Bundle 'gmarik/vundle'
@@ -130,6 +132,7 @@ set incsearch   " Incremental search, search as you type
 set hlsearch    " Highlight all matches
 set ignorecase  " Case-insensitive search
 set smartcase
+nnoremap / :nohlsearch<CR> /
 
 " Folding
 set foldmethod=indent "fold based on indent
