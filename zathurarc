@@ -22,6 +22,8 @@ map Z quit
 
 set scroll-step 70
 
+set incremental-search
+
 set font "inconsolata normal 12"
 
 ## COLORS
