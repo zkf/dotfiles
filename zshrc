@@ -36,8 +36,8 @@ autoload -U colors && colors
 prompt grml-large
 zstyle ':prompt:grml-large:*:items:user' pre '%F{green}'
 zstyle ':prompt:grml-large:*:items:host' pre '%F{magenta}'
-zstyle ':prompt:grml-large:*:items:path' pre '%F{blue}'
-zstyle ':prompt:grml-large:*:items:percent' pre '%F{yellow}'
+# zstyle ':prompt:grml-large:*:items:path' pre '%F{blue}'
+# zstyle ':prompt:grml-large:*:items:percent' pre '%F{yellow}'
 
 source /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
