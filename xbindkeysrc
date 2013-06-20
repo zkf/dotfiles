@@ -14,7 +14,7 @@
     Mod2 + XF86Tools
 
 "~/bin/exx xbmc"
-    m:0x10 + c:148
+    m:0x40 + c:148
 
 "~/bin/invertx"
     Mod4 + k
@@ -37,7 +37,7 @@
 "~/bin/trackpad-toggle"
     XF86TouchpadToggle
 
-"urxvt"
+"urxvt -e /usr/bin/zsh"
     Mod4 + Return
 
 "scrot %Y-%m-%d_%H:%M:%S_\$wx\$h.png -e "mv \$f ~/screenshots/""
