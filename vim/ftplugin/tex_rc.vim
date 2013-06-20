@@ -23,5 +23,5 @@ noremap <buffer> u gk
 noremap <buffer> E 5gj
 noremap <buffer> U 5gk
 
-command -buffer  Make latexmk -pdf -outdir=build report.pdf
+command! -buffer Make :!latexmk -pdf -outdir=build %
 
