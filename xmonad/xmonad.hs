@@ -40,6 +40,7 @@ import XMonad.Actions.CopyWindow
 import XMonad.Actions.SinkAll
 import XMonad.Actions.Volume
 import XMonad.Actions.CycleWS
+import XMonad.Actions.DynamicWorkspaces
 
 import qualified Data.Map         as M
 import qualified XMonad.StackSet  as W
@@ -183,8 +184,6 @@ wsColorMap =
 myKeys :: XConfig l -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf = mkKeymap conf $
     [
-        ("M-S-<Return>" , spawn $ XMonad.terminal conf)        ,
-
         -- Prompts
         ("M-l"          , shellPrompt myShellPrompt)           ,
         ("M-<KP_Multiply>"          , calcPrompt  myShellPrompt "qalc")   ,
@@ -221,12 +220,16 @@ myKeys conf = mkKeymap conf $
         ("M-C-u" , sendMessage Expand) ,
 
         -- Quit or reload XMonad
-        ("M-S-<Escape>" , io exitSuccess),
+        ("M-S-<Escape>", runProcessWithInput "/home/anachron/bin/closeallwindows" [] ""
+                >> io exitSuccess),
         ("M-<Escape>"   , broadcastMessage ReleaseResources >> restart "xmonad" True),
 
         -- next / previous screen
         ("M-w"   , nextScreen),
-        ("M-S-w" , swapNextScreen)
+        ("M-S-w" , swapNextScreen),
+
+        -- Workspaces
+        ("M-C-n", renameWorkspace myShellPrompt) -- rename workspace
     ]
     ++
     -- "M-[1..9,0,-]" -- Switch to workspace N
@@ -267,6 +270,7 @@ myManageHook = composeAll
     , className      =? "feh"                --> doFloat
     , className      =? "XVroot"             --> doFloat
     , className      =? "Pavucontrol"        --> doFloat
+    , className      =? "Nm-connection-editor"        --> doFloat
     , className      =? "xbmc.bin"           --> doFullFloat
     , isFullscreen                           --> doFullFloat
     ] <+> manageDocks
@@ -336,9 +340,8 @@ main = do
             manageHook  = myManageHook,
             modMask     = mod4Mask,
             startupHook = setWMName "LG3D",
-            terminal    = "urxvt",
             workspaces  = myWorkspaces
         }
-  where myUrgencyHook = SpawnUrgencyHook "~/.xmonad/urgentHook"
+  where myUrgencyHook = SpawnUrgencyHook "~/.xmonad/urgentHook "
         myUrgencyConfig = urgencyConfig {remindWhen = Every (minutes 1)}
 
