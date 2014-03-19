@@ -19,7 +19,7 @@ alias restart='nohup zsh -c "~/bin/closeallwindows; systemctl --user exit; syste
 alias grep='grep --color=auto'
 alias ls='ls --color=auto -F --group-directories-first'
 alias ll='ls -la'
-alias psa='ps aux |grep'
+alias psa='ps aux | grep'
 alias today='date +%Y-%m-%d'
 alias pingu='ping 8.8.8.8 -c 5 -i 0.5'
 
