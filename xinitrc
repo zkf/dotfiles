@@ -5,8 +5,12 @@
 # Executed by startx (run your window manager from here)
 #
 
+
+# Redirect stdout/stderr to log file
+exec > /var/log/xinitrc.log 2>&1
+
 ## Do host-specific things
-case ${HOSTNAME} in
+case $(hostname) in
     watson)   # start some programs
               skype &
               #mediatomb -l ~/.mediatomb/mediatomb.log &
@@ -37,25 +41,33 @@ case ${HOSTNAME} in
               ;;
 
     lestrade)
+              systemctl --user start xorg.target
               pulseaudio --start
               skype &
               firefox &
               dropboxd &
               nm-applet &
               udiskie &
-              # xcompmgr -D 6 -C -f &
               dunst &
-              (sleep 0.5 && alock -auth pam -bg shade:50) &
+              fbxkb &
               xbindkeys
+              ( cd "$HOME/projects/colemak[ed]/xkb-bbokt/";
+                setxkbmap \
+                    -rules colemak \
+                    -model pc105awide-sl \
+                    -layout nocolemak,brcolemak \
+                    -variant cmk_ed_us,cmk_ed_us \
+                    -option lv5:caps_switch_lock,misc:extend,grp:ctrls_toggle \
+                    -print \
+                | xkbcomp  -I$PWD - :0 ) &
               xmodmap ~/.Xmodmap
               xsetroot -solid black
+              redshift -l 3.688855:11.674803 -t 6500:3000 &
               compton --backend glx --paint-on-overlay --glx-no-stencil \
                   --vsync opengl-swc --config ~/config/compton.conf -b &
+              syndaemon -i 1.0 -t -k -d
               ;;
-esac >& - # throw away output
-
-# Allow boinc to use GPU
-#xhost local:boinc
+esac >&/dev/null # we don't want the output from those programs to clutter up the log file.
 
 # load X settings
 xrdb -load ~/.Xresources
@@ -68,21 +80,17 @@ xsetroot -cursor_name left_ptr
 # Speed up key repeating
 xset r rate 250
 
+# Set screen to dim after 5min, timeout/lock 1m later (with xss-lock)
+xset s 300 60
+
 xset +fp /usr/share/fonts/local/
 xset fp rehash
 
+synclient PalmDetect=1 PalmMinZ=40 PalmMinWidth=4
 
-wm_bin="$1"
-wm_bin="xmonad"
+trayer --transparent true --alpha 0 --tint 0xfdf6e3 --edge top \
+    --align right --heighttype pixel --height 22 \
+    --widthtype percent --width 7 &
 
-if [[ xmonad == ${wm_bin} ]]
-then
-    trayer --transparent true --alpha 0 --tint 0xfdf6e3 --edge top \
-        --align right --heighttype pixel --height 22 \
-        --widthtype percent --width 7 &
-    exec xmonad
-elif [[ xfce4 == ${wm_bin} ]]
-then
-    exec startxfce4
-fi
+exec xmonad
 
