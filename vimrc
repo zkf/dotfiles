@@ -5,8 +5,7 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
 " --- Bundles ---
-"
-Bundle "live-latex-preview"
+
 
 "" Helpers
 Bundle 'gmarik/vundle'
@@ -22,6 +21,7 @@ Bundle 'yurifury/hexHighlight'
 " Bundle 'Shougo/neocomplcache'
 Bundle 'Raimondi/delimitMate'
 Bundle 'Valloric/YouCompleteMe'
+let g:ycm_path_to_python_interpreter = '/usr/bin/python2'
 Bundle 'scrooloose/syntastic'
 Bundle 'SirVer/ultisnips'
 
@@ -32,21 +32,25 @@ Bundle 'dag/vim2hs'
 Bundle 'auctex.vim'
 Bundle 'tikhomirov/vim-glsl'
 Bundle 'rbonvall/vim-textobj-latex'
-
-"" UI / UX
+" Bundle 'vim-pandoc/vim-pandoc'
+Bundle 'vim-pandoc/vim-pandoc-syntax'
+Bundle 'yaml.vim'
+"
+""" UI / UX
 Bundle 'scrooloose/nerdtree'
 Bundle 'majutsushi/tagbar'
 Bundle 'Lokaltog/vim-powerline'
 
+Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'kana/vim-textobj-indent'
 Bundle 'kana/vim-textobj-user'
 Bundle 'wincent/Command-T'
 Bundle 'godlygeek/tabular'
 Bundle 'VOoM'
+Bundle 'justinmk/vim-sneak'
 
 "" Deps for other bundle
 " for neocomplcache
@@ -159,7 +163,7 @@ set autoread " Reload changed file automatically
 
 " *.md files are markdown, not modula2
 autocmd BufNewFile,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
-    \ set filetype=markdown
+    \ set filetype=pandoc
 
 " jump to the last cursor position
 autocmd BufReadPost *
@@ -179,6 +183,8 @@ let g:TabLineSet_tabnr = 1
 " Enable mouse
 set mouse=a
 
+source ~/.vim/bundle/vim-repeat/autoload/repeat.vim
+
 "**** Keybindings ****
 " toggle paste mode (to paste properly indented text)
 nnoremap <F8> :set invpaste paste?<CR>
@@ -190,21 +196,6 @@ nmap <silent> <leader><space> :nohlsearch<CR>
 nnoremap ' `
 nnoremap ` '
 
-" for Colemak
-noremap u k
-noremap U 5k
-noremap n h
-noremap N 5h
-noremap e j
-noremap E 5j
-noremap i l
-noremap I 5l
-
-noremap h i
-noremap H I
-noremap æ u
-noremap å <C-r>
-noremap K N
 noremap k n
 
 "go to end/beginning of words
