@@ -1,18 +1,20 @@
 # vim: set ft=sh
 
+alias pacman='pacman --color always'
 alias Syu='sudo pacman -Syu'
 alias S='sudo pacman -S'
 alias Ss='pacman -Ss'
 alias Si='pacman -Si'
 alias Qi='pacman -Qi'
 alias Ql='pacman -Ql'
+alias Qs='pacman -Qs'
 alias updatemirrors='sudo reflector -l 8 -f 4 --threads 4 --sort rate --save /etc/pacman.d/mirrorlist'
-alias owl='LANG=C owl'
+alias owl='LANG=C owlman'
 
 alias svim='sudoedit'
 
-alias stop='systemctl poweroff'
-alias restart='systemctl reboot'
+alias stop='nohup zsh -c "~/bin/closeallwindows; systemctl --user exit; systemctl poweroff"'
+alias restart='nohup zsh -c "~/bin/closeallwindows; systemctl --user exit; systemctl reboot"'
 
 alias grep='grep --color=auto'
 alias ls='ls --color=auto -F --group-directories-first'
@@ -20,8 +22,5 @@ alias ll='ls -la'
 alias psa='ps aux |grep'
 alias today='date +%Y-%m-%d'
 alias pingu='ping 8.8.8.8 -c 5 -i 0.5'
-alias periscope='periscope --language=en'
-alias irc="ssh -C bjorh08@login.uia.no -t '. .bash_profile; . .bashrc; tmux -2 a -t svale'"
 
-alias vensim="wine /home/anachron/.wine/drive_c/Program\ Files/Vensim/Venple.exe"
-alias leftovers='sudo -E owl leftovers'
+alias leftovers='sudo -E owlman leftovers'
