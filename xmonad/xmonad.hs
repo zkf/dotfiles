@@ -1,3 +1,4 @@
+{-# LANGUAGE PostfixOperators #-}
 -- XMonad config file
 --
 -- By Bjørnar Hansen <tilbjornar@gmail.com>
@@ -5,11 +6,12 @@
 -- XMonad version 0.10
 --
 {-- imports --}
-import XMonad hiding ( (|||) )
+import Control.Concurrent (threadDelay)
 import Data.Char (isSpace)
 import System.Exit
 import System.IO (Handle)
 
+import XMonad hiding ( (|||) )
 import XMonad.Util.Run
 import XMonad.Util.EZConfig
 
@@ -154,7 +156,11 @@ calcPrompt c ans =
 {-- Workspaces --}
 
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = map show [1..9::Int] ++ ["0","+"]
+myWorkspaces =
+  map show [1,2,3,4,5,6 :: Int]
+    ++ ["="]
+    ++ map show [7,8,9,0::Int]
+    ++ ["-"]
 
 myWorkspaceNames :: [WorkspaceId]
 myWorkspaceNames =
@@ -220,8 +226,8 @@ myKeys conf = mkKeymap conf $
         ("M-C-u" , sendMessage Expand) ,
 
         -- Quit or reload XMonad
-        ("M-S-<Escape>", runProcessWithInput "/home/anachron/bin/closeallwindows" [] ""
-                >> io exitSuccess),
+        ("M-S-<Escape>", safeSpawn "setsid" ["/home/anachron/bin/closeallwindows"]
+                         >> io (threadDelay (1 `seconds`) >> exitSuccess)),
         ("M-<Escape>"   , broadcastMessage ReleaseResources >> restart "xmonad" True),
 
         -- next / previous screen
@@ -248,33 +254,34 @@ myKeys conf = mkKeymap conf $
 
 {--  Hooks --}
 
-myManageHook :: Query (Endo WindowSet)
-myManageHook = composeAll
-    [ className      =? "stalonetray"        --> doIgnore
-    , className      =? "Skype"              --> doShift ( workspace "com" )
-    , className      =? "Kopete"             --> doShift ( workspace "com" )
-    , className      =? "Spotify"            --> doShift ( workspace "mus" )
-    , className      =? "Tomahawk"           --> doShift ( workspace "mus" )
-    , className      =? "Firefox"            --> doShift ( workspace "web" )
-    , title          =? "Firefox Preferences"--> doFloat
-    , title          =? "glxgears"           --> doFloat
-    , title          =? "TSP"                --> doFloat
-    , className      =? ""                   --> doFloat
-    , resource       =? "sun-awt-X11-XFramePeer" --> doFloat
-    , resource       =? "explorer.exe"       --> doFloat
-    , className      =? "fontforge"          --> doFloat
-    , className      =? "MPlayer"            --> doFloat
-    , className      =? "Steam"              --> doFloat
-    , title          =? "Steam"              --> doFloat
-    , className      =? "Gnuplot"            --> doFloat
-    , className      =? "feh"                --> doFloat
-    , className      =? "XVroot"             --> doFloat
-    , className      =? "Pavucontrol"        --> doFloat
-    , className      =? "Nm-connection-editor"        --> doFloat
-    , className      =? "xbmc.bin"           --> doFullFloat
-    , isFullscreen                           --> doFullFloat
-    ] <+> manageDocks
+myManageHook = composeOne
+    [ transience
+     , className      =? "stalonetray"        -?> doIgnore
+     -- , className      =? "Skype"              -?> doShift ( workspace "com" )
+     -- , className      =? "Kopete"             -?> doShift ( workspace "com" )
+     -- , className      =? "Spotify"            -?> doShift ( workspace "mus" )
+     -- , className      =? "Tomahawk"           -?> doShift ( workspace "mus" )
+     -- , className      =? "Firefox"            -?> doShift ( workspace "web" )
+     , className      =? "xbmc.bin"           -?> doFullFloat
+     , isFullscreen                           -?> doFullFloat
+     ] <+> composeOne [className =? x -?> doCenterFloat | x <- classFloats]
+       <+> composeOne [title =? x -?> doCenterFloat | x <- titleFloats]
+       <+> composeOne [resource =? x -?> doCenterFloat | x <- resourceFloats]
+       <+> composeOne
+              [className =? x -?> doShift (workspace y) | (x,y) <- classShifts]
+    <+> manageDocks
     where workspace wsName = fromMaybe "1" $ M.lookup wsName wsNameToId
+          classFloats =
+            ["","fontforge", "MPlayer","Steam","Gnuplot","feh", "XVroot"
+            ,"Pavucontrol", "Nm-connection-editor", "Anki"]
+          titleFloats  = ["Steam", "glxgears", "Firefox Preferences"]
+          resourceFloats = ["sun-awt-X11-XFramePee?", "explorer.exe"]
+          classShifts = [("Skype", "com")
+                        ,("Kopete", "com")
+                        ,("Spotify", "mus")
+                        ,("Tomahawk", "mus")
+                        ,("Firefox", "web")
+                        ]
 
 
 myLayoutHook =  avoidStruts
@@ -332,7 +339,7 @@ main = do
 
             keys        = myKeys,
             layoutHook  = myLayoutHook,
-            logHook     = fadeInactiveLogHook 0.8
+            logHook     = fadeInactiveLogHook 0.95
                             >> myXmobar xmproc0
                             >> myXmobar xmproc1
                             >> updatePointer (Relative 0.99 0.99),
