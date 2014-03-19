@@ -13,7 +13,7 @@ if [[ -z "$STARTED_TMUX"  && -n "$SSH_TTY" ]]; then
 fi
 
 ## Color for ls
-eval $(dircolors -b ~/config/dircolors-solarized.ansi-universal)
+eval $(dircolors -b ~/config/dircolors.ansi-light)
 
 ## TAB COMPLETION
 autoload -U zutil
@@ -48,7 +48,7 @@ source ~/.aliases
 
 
 ## ENVIRONMENT
-export PATH=$HOME/.cabal/bin:$HOME/.gem/ruby/1.9.1/bin:$PATH
+export PATH=$HOME/.cabal/bin:$HOME/.gem/ruby/2.0.0/bin:$PATH
 export BROWSER="firefox"
 export EDITOR=vim
 if [[ -n $(type -p vimpager 2>&-) ]]; then
@@ -62,14 +62,17 @@ fi
 export ARCH_HASKELL='Bjørnar Hansen <tilbjornar@gmail.com>'
 #export PKGBUILD_HASKELL_ENABLE_PROFILING=1
 
-## Opts for owl
-export OWL_AUR_HOME="$HOME/.aur"
+## Opts for owlman
+export OWLMAN_AUR_HOME="$HOME/.aur"
 
 ## Opts for java
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
 
 ## Opts for steam
 export STEAM_FRAME_FORCE_CLOSE=1
+
+## ruby
+export GEM_HOME=~/.gem/ruby/2.0.0
 
 ## KEYBINDS
 bindkey -e
@@ -81,8 +84,8 @@ bindkey '\e[2~' quoted-insert                     # Ins
 bindkey '\e[3~' delete-char                       # Del
 if [[ $TERM == screen-256color ]]; then
     ## tmux
-    bindkey '\eOC'  forward-word
-    bindkey '\eOD'  backward-word
+    bindkey '\e[C'  forward-word
+    bindkey '\e[D'  backward-word
     bindkey '\e[1~' beginning-of-line   # Home
     bindkey '\e[4~' end-of-line         # End
     bindkey '^H'    backward-kill-word  # C-BS  (delete word backward)
