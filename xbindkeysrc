@@ -1,7 +1,7 @@
 "~/bin/dualhead"
     m:0x0 + c:248
 
-"qdbus org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 PlayPause"
+"~/bin/fade-pause"
     XF86AudioPlay
 
 "/usr/bin/asus-kbd-backlight up"
@@ -37,7 +37,7 @@
 "~/bin/trackpad-toggle"
     XF86TouchpadToggle
 
-"urxvt -e /usr/bin/zsh"
+"termite"
     Mod4 + Return
 
 "scrot %Y-%m-%d_%H:%M:%S_\$wx\$h.png -e "mv \$f ~/screenshots/""
@@ -46,3 +46,17 @@
 "sleep 0.2; scrot -s %Y-%m-%d_%H:%M:%S_\$wx\$h.png -e "mv \$f ~/screenshots/""
     m:0x14 + c:107
 
+# "nohup zsh -c "bin/closeallwindows; systemctl --user exit""
+#    Shift+Mod4 + Escape
+
+"~/bin/adjust-brightness"
+    Mod2 + XF86MonBrightnessUp
+
+"~/bin/adjust-brightness"
+    Mod2 + XF86MonBrightnessDown
+
+"~/bin/typepass"
+    Mod4 + Shift + p
+
+"xset s activate"
+    Mod4 + z
