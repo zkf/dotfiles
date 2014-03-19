@@ -1,9 +1,7 @@
 
 " TAB behaviour
-set expandtab     " Turn <Tab> into spaces
-set shiftwidth=4  " Insert 4 spaces for each tab
-set tabstop=4
-set smarttab
+set shiftwidth=2  " Insert 2 spaces for each tab
+set tabstop=2
 set textwidth=79
 set colorcolumn=80
 setlocal formatoptions+=t
