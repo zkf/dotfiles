@@ -1,5 +1,5 @@
 [global]
-    font = "FontAwesome,terminus 18px"
+    font = "terminus 18px"
 
     # The format of the message. Possible variables are:
     #   %a  appname
