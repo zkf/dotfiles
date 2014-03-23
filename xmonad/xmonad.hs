@@ -6,50 +6,43 @@
 -- XMonad version 0.10
 --
 {-- imports --}
-import Control.Concurrent (threadDelay)
-import Data.Char (isSpace)
-import System.Exit
-import System.IO (Handle)
 
-import XMonad hiding ( (|||) )
-import XMonad.Util.Run
-import XMonad.Util.EZConfig
-
-import XMonad.Layout.LayoutCombinators
-import XMonad.Layout.LayoutHints
-import qualified XMonad.Layout.ToggleLayouts as TL
-import XMonad.Layout.NoBorders
-import XMonad.Layout.IM
-import XMonad.Layout.Grid
-import XMonad.Layout.WindowNavigation
-import XMonad.Layout.PerWorkspace
-
-import XMonad.Prompt
-import XMonad.Prompt.Shell
-import XMonad.Prompt.Input
-
-
-import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.FadeInactive
-import XMonad.Hooks.ManageDocks   -- avoidstruts
-import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.SetWMName
-import XMonad.Hooks.UrgencyHook
-
-import XMonad.Actions.UpdatePointer
-import XMonad.Actions.CopyWindow
-import XMonad.Actions.SinkAll
-import XMonad.Actions.Volume
-import XMonad.Actions.CycleWS
-import XMonad.Actions.DynamicWorkspaces
-
-import qualified Data.Map         as M
-import qualified XMonad.StackSet  as W
-
-import qualified SolarizedColors  as Color
-import Data.Maybe
-import Data.Monoid (Endo)
+import           Control.Concurrent               (threadDelay)
+import           Data.Char                        (isSpace)
+import qualified Data.Map                         as M
+import           Data.Maybe
+import           Data.Monoid                      (Endo)
+import qualified SolarizedColors                  as Color
+import           System.Exit
+import           System.IO                        (Handle)
+import           XMonad                           hiding ((|||))
+import           XMonad.Actions.CopyWindow
+import           XMonad.Actions.CycleWS
+import           XMonad.Actions.DynamicWorkspaces
+import           XMonad.Actions.SinkAll
+import           XMonad.Actions.UpdatePointer
+import           XMonad.Actions.Volume
+import           XMonad.Hooks.DynamicLog
+import           XMonad.Hooks.EwmhDesktops
+import           XMonad.Hooks.FadeInactive
+import           XMonad.Hooks.ManageDocks
+import           XMonad.Hooks.ManageHelpers
+import           XMonad.Hooks.SetWMName
+import           XMonad.Hooks.UrgencyHook
+import           XMonad.Layout.Grid
+import           XMonad.Layout.IM
+import           XMonad.Layout.LayoutCombinators
+import           XMonad.Layout.LayoutHints
+import           XMonad.Layout.NoBorders
+import           XMonad.Layout.PerWorkspace
+import qualified XMonad.Layout.ToggleLayouts      as TL
+import           XMonad.Layout.WindowNavigation
+import           XMonad.Prompt
+import           XMonad.Prompt.Input
+import           XMonad.Prompt.Shell
+import qualified XMonad.StackSet                  as W
+import           XMonad.Util.EZConfig
+import           XMonad.Util.Run
 
 {-- Theme / color settings --}
 
