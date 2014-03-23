@@ -6,57 +6,89 @@ call vundle#rc()
 
 " --- Bundles ---
 
-
-"" Helpers
+"" Bundle bundle
 Bundle 'gmarik/vundle'
+"" Git helper (try :Gdiff)
 Bundle 'tpope/vim-fugitive'
-Bundle 'bitc/vim-hdevtools'
 
 "" Themes, colours etc.
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'tomasr/molokai'
+Bundle 'jonathanfilip/vim-lucius'
+Bundle 'twerth/ir_black'
+Bundle 'tejr/sahara'
 Bundle 'ap/vim-css-color'
 Bundle 'yurifury/hexHighlight'
 
-"" Completion etc.
-" Bundle 'Shougo/neocomplcache'
-Bundle 'Raimondi/delimitMate'
+"" Complete stuff. Needs python2.
 Bundle 'Valloric/YouCompleteMe'
 let g:ycm_path_to_python_interpreter = '/usr/bin/python2'
+"" Check stuff
 Bundle 'scrooloose/syntastic'
+"" Insert stuff
 Bundle 'SirVer/ultisnips'
+"" Close stuff (brackets, quotes etc.)
+Bundle 'Raimondi/delimitMate'
 
 "" Language specific
-" Bundle 'ujihisa/neco-ghc'
-Bundle 'eagletmt/ghcmod-vim'
-Bundle 'dag/vim2hs'
-Bundle 'auctex.vim'
+if executable("ghc-mod")
+    Bundle 'eagletmt/neco-ghc'
+    Bundle 'eagletmt/ghcmod-vim'
+endif
+if executable("hdevtools")
+    Bundle 'bitc/vim-hdevtools'
+endif
+" Bundle 'dag/vim2hs'
+" Haskell HTML templating syntax
+Bundle 'pbrisbin/html-template-syntax'
+" Bundle 'Twinside/vim-syntax-haskell-cabal'
+" haskell indentation
+" Bundle 'kana/vim-filetype-haskell'
+Bundle 'zkf/hasksyn'
+" Bundle 'Haskell-Highlight-Enhanced'
+Bundle 'Superior-Haskell-Interaction-Mode-SHIM'
+" Better folding of Haskell functions
+Bundle 'Twinside/vim-haskellFold'
+
+"Bundle 'auctex.vim'
 Bundle 'tikhomirov/vim-glsl'
-Bundle 'rbonvall/vim-textobj-latex'
+"Bundle 'rbonvall/vim-textobj-latex'
 " Bundle 'vim-pandoc/vim-pandoc'
 Bundle 'vim-pandoc/vim-pandoc-syntax'
 Bundle 'yaml.vim'
-"
+Bundle 'ynkdir/vim-vimlparser'
+
 """ UI / UX
+" Directory treeview
 Bundle 'scrooloose/nerdtree'
+" Automatic (re-)loading of tags
+Bundle 'xolox/vim-easytags'
+" List of tags in sidebar
 Bundle 'majutsushi/tagbar'
-Bundle 'Lokaltog/vim-powerline'
+" Haskell tags for tagbar
+Bundle 'bitc/lushtags'
 
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'kana/vim-textobj-indent'
-Bundle 'kana/vim-textobj-user'
-Bundle 'wincent/Command-T'
+" find stuff
+Bundle 'kien/ctrlp.vim'
+" Aligning text (:Tab[ularize])
 Bundle 'godlygeek/tabular'
+" Vim outliner
 Bundle 'VOoM'
+" supercharged f/t search mainly bound to s
 Bundle 'justinmk/vim-sneak'
 
-"" Deps for other bundle
-" for neocomplcache
+"" Deps for other bundles
+" for neocomplete, ghcmod
 Bundle 'Shougo/vimproc'
-" for vim-textobj-user
+" for vim-textobj-X
 Bundle 'kana/vim-textobj-user'
+" for vim-easytags
+Bundle 'xolox/vim-misc'
 
 " --- end bundles ---
 filetype plugin indent on
@@ -66,24 +98,21 @@ set exrc
 " set secure
 "
 
+"" Completion
 
+set ofu=syntaxcomplete#Complete
+set completeopt=menu,menuone,longest
 
-" Use neocomplcache
-" let g:neocomplcache_enable_at_startup = 1
-" let g:neocomplcache_enahle_smart_case            = 1
-" let g:neocomplcache_enable_camel_case_completion = 1
-" let g:neocomplcache_enable_underbar_completion   = 1
-" let g:neocomplcache_min_syntax_length            = 3
-" let g:neocomplcache_lock_buffer_name_pattern = '\v(\.md|\.txt)'
-
-" Tab navigation in popup
-let g:ycm_key_list_previous_completion=['<Up>']
-" imap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<Plug>delimitMateS-Tab"
+"" Easytags
+" Uses the first tags path in `tags', which fugitive sets to
+" the nearest `.git/<filetype>.tags'
+let g:easytags_dynamic_files = 2
 
 "" Ultisnips
-let g:UltiSnipsExpandTrigger='<F6>'
-let g:UltiSnipsListSnippets='<C-S-Tab>'
+" TODO integrate better with YCM?
+let g:UltiSnipsExpandTrigger='<C-l>'
+let g:UltiSnipsJumpForwardTrigger='<C-l>'
+let g:UltiSnipsJumpBackwardTrigger='<C-j>'
 
 
 
@@ -99,18 +128,22 @@ call togglebg#map("<F5>") " for solarized
 colorscheme solarized
 
 set ls=2   " always show status line
-"call Pl#Theme#RemoveSegment('fugitive:branch')
+set fillchars+=stl:\ ,stlnc:\
+set encoding=utf-8
 let g:Powerline_symbols = 'fancy'
 let g:Powerline_theme = 'default'
-let g:Powerline_colorscheme = 'solarized'
+let g:Powerline_colorscheme = 'default'
 
-" NERD tree
+" Automatically resize windows
+au VimResized * wincmd =
+
 nnoremap <F1> :NERDTreeToggle<CR>
+noremap <F2> :TagbarToggle<CR>
 
 " use fast tty
 set ttyfast
 
-"**** TAB behaviour ****
+" <Tab> behaviour
 set expandtab     " Turn <Tab> into spaces
 set shiftwidth=4  " Insert 4 spaces for each tab
 set tabstop=4
@@ -127,8 +160,9 @@ set wrap
 " imap <S-Tab> <Esc><<i
 
 
-set linebreak       " Wrap long lines at the chars found in 'breakat'
-"set textwidth=79   " Max length of lines
+" set linebreak       " Wrap long lines at the chars found in 'breakat'
+set textwidth=79
+set colorcolumn=80
 set nojoinspaces    " Don't double-space after periods (actually does more)
 
 " Searching
@@ -175,18 +209,13 @@ set grepprg=grep\ -nH\ $*
 
 "autocmd BufEnter * lcd %:p:h  " Set work dir to current file's dir
 
- "" TABs
-let g:TabLineSet_tabnr = 1
-" use omnicompletion for supertab
-"let g:SuperTabDefaultCompletionType = "<C-x><C-o>"
-
 " Enable mouse
 set mouse=a
 
 source ~/.vim/bundle/vim-repeat/autoload/repeat.vim
 
 "**** Keybindings ****
-" toggle paste mode (to paste properly indented text)
+" Toggle paste mode (to paste properly indented text)
 nnoremap <F8> :set invpaste paste?<CR>
 set pastetoggle=<F8>
 
@@ -196,15 +225,6 @@ nmap <silent> <leader><space> :nohlsearch<CR>
 nnoremap ' `
 nnoremap ` '
 
-noremap k n
-
-"go to end/beginning of words
-noremap l e
-noremap L E
-"the same, but backwards
-noremap gl ge
-noremap gL gE
-
 "window navigation
 map <C-e> <C-W><Down>
 map <C-u> <C-W><Up>
@@ -212,4 +232,28 @@ map <C-n> <C-W><Left>
 map <C-i> <C-W><Right>
 
 
-let g:hdevtools_options = '-g -hide-package -g GLFW'
+" https://gist.github.com/docwhat/2973488
+" https://docwhat.org/vim-preserve-your-cursor-and-window-state/
+" A wrapper function to restore the cursor position, window position,
+" and last search after running a command.
+function! Preserve(command)
+  " Save the last search
+  let last_search=@/
+  " Save the current cursor position
+  let save_cursor = getpos(".")
+  " Save the window position
+  normal H
+  let save_window = getpos(".")
+  call setpos('.', save_cursor)
+
+  " Do the business:
+  execute a:command
+
+  " Restore the last_search
+  let @/=last_search
+  " Restore the window position
+  call setpos('.', save_window)
+  normal zt
+  " Restore the cursor position
+  call setpos('.', save_cursor)
+endfunction
