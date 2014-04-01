@@ -1,7 +1,13 @@
 "~/bin/dualhead"
     m:0x0 + c:248
 
-"~/bin/fade-pause"
+"~/bin/mpris-control mopidy Next"
+    XF86AudioNext
+
+"~/bin/mpris-control mopidy Previous"
+    XF86AudioPrev
+
+"~/bin/mpris-control mopidy PlayPause"
     XF86AudioPlay
 
 "/usr/bin/asus-kbd-backlight up"
@@ -22,13 +28,13 @@
 "~/bin/udsks.sh"
     Mod4 + F12
 
-"ponymix -c0 toggle"
+"~/bin/adjust-volume toggle"
     XF86AudioMute
 
-"ponymix -c0 decrease 5"
+"~/bin/adjust-volume decrease"
     XF86AudioLowerVolume
 
-"ponymix -c0 increase 5"
+"~/bin/adjust-volume increase"
     XF86AudioRaiseVolume
 
 "~/bin/headphones-toggle"
