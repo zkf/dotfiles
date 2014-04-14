@@ -58,21 +58,24 @@ else
     export PAGER=less
 fi
 
-## Opts for cabal2arch
+## cabal2arch
 export ARCH_HASKELL='Bjørnar Hansen <tilbjornar@gmail.com>'
 #export PKGBUILD_HASKELL_ENABLE_PROFILING=1
 
-## Opts for owlman
+## owlman
 export OWLMAN_AUR_HOME="$HOME/.aur"
 
-## Opts for java
+## java
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
 
-## Opts for steam
+## steam
 export STEAM_FRAME_FORCE_CLOSE=1
 
 ## ruby
 export GEM_HOME=~/.gem/ruby/2.0.0
+
+## python
+export PYTHONPATH=~/.local/lib/python2.7/site-packages
 
 ## KEYBINDS
 bindkey -e
