@@ -41,6 +41,14 @@ servers = (
     use_ssl = "yes";
     ssl_verify = "yes";
     autoconnect = "yes";
+  },
+  {
+    address = "localhost";
+    chatnet = "Bitlbee";
+    port = "6667";
+    use_ssl = "no";
+    ssl_verify = "no";
+    autoconnect = "yes";
   }
 );
 
@@ -94,13 +102,18 @@ chatnets = {
     autosendcmd = "/identify anachron@irc.freenode.net;/window goto nickserv;/wc";
   };
   Rizon = { type = "IRC"; };
+  Bitlbee = {
+    type = "IRC";
+    autosendcmd = "/identify bitlbee;/window goto nickserv;/wc";
+  };
 };
 
 channels = (
   { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
   { name = "#archlinux"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#haskell"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#zen-sources"; chatnet = "Rizon"; autojoin = "No"; }
+  { name = "#zen-sources"; chatnet = "Rizon"; autojoin = "No"; },
+  { name = "&bitlbee"; chatnet = "Bitlbee"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -272,9 +285,9 @@ statusbar = {
 settings = {
   core = {
     real_name = "Bjørnar Hansen";
-    user_name = "bjorh08";
     nick = "anachron";
     timestamp_format = "%H:%M ";
+    user_name = "anachron";
   };
   "fe-text" = { actlist_sort = "refnum"; term_force_colors = "yes"; };
   "fe-common/core" = {
