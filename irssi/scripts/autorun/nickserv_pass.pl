@@ -1,0 +1,1 @@
+../nickserv_pass.pl

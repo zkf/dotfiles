@@ -90,7 +90,8 @@ chatnets = {
   };
   freenode = {
     type = "IRC";
-    autosendcmd = "/query nickserv identify a89%...98*null@z;/window goto nickserv;/wc";
+    # autosendcmd = "/identify anachron@irc.freenode.net";
+    autosendcmd = "/identify anachron@irc.freenode.net;/window goto nickserv;/wc";
   };
   Rizon = { type = "IRC"; };
 };
