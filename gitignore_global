@@ -56,4 +56,8 @@ vim/.netrwhist
 authorsfile
 # Vensim
 *.2mdl
+cabal.sandbox.config
+.cabal-sandbox/
 
+wam
+test
