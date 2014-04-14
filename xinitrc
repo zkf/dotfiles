@@ -42,25 +42,14 @@ case $(hostname) in
 
     lestrade)
               systemctl --user start xorg.target
-              pulseaudio --start
-              skype &
               firefox &
-              dropboxd &
-              nm-applet &
               udiskie &
               dunst &
-              fbxkb &
+              # setxkbmap -rules colemak -model pc105awide-sl -layout \
+                  # 'nocolemak(cmk_ed_us),brcolemak(cmk_ed_us)' \
+                  # -option '' -option misc:extend -option lv5:caps_switch_lock \
+                  # -option grp:menu_toggle -v 10
               xbindkeys
-              ( cd "$HOME/projects/colemak[ed]/xkb-bbokt/";
-                setxkbmap \
-                    -rules colemak \
-                    -model pc105awide-sl \
-                    -layout nocolemak,brcolemak \
-                    -variant cmk_ed_us,cmk_ed_us \
-                    -option lv5:caps_switch_lock,misc:extend,grp:ctrls_toggle \
-                    -print \
-                | xkbcomp  -I$PWD - :0 ) &
-              xmodmap ~/.Xmodmap
               xsetroot -solid black
               redshift -l 3.688855:11.674803 -t 6500:3000 &
               compton --backend glx --paint-on-overlay --glx-no-stencil \
@@ -88,9 +77,11 @@ xset fp rehash
 
 synclient PalmDetect=1 PalmMinZ=40 PalmMinWidth=4
 
-trayer --transparent true --alpha 0 --tint 0xfdf6e3 --edge top \
-    --align right --heighttype pixel --height 22 \
-    --widthtype percent --width 7 &
+rm ~/.volpipe && mkfifo ~/.volpipe
+echo "--" >> ~/.volpipe &
 
-exec xmonad
+tmux new-session -d -s'com' irssi
+tmux new-session -d -s'work' -c ~/projects/work/tingtun/
+
+exec $HOME/.cabal/bin/xmonad
 
