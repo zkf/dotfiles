@@ -39,7 +39,7 @@ zstyle ':prompt:grml-large:*:items:host' pre '%F{magenta}'
 # zstyle ':prompt:grml-large:*:items:path' pre '%F{blue}'
 # zstyle ':prompt:grml-large:*:items:percent' pre '%F{yellow}'
 
-source /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 
 
@@ -107,4 +107,3 @@ elif [[ $TERM == linux ]]; then
     bindkey '\e[1~' beginning-of-line # Home
     bindkey '\e[4~' end-of-line       # End
 fi
-
