@@ -51,7 +51,7 @@ source ~/.aliases
 export PATH=$HOME/.cabal/bin:$HOME/.gem/ruby/2.0.0/bin:$PATH
 export BROWSER="firefox"
 export EDITOR=vim
-if [[ -n $(type -p vimpager 2>&-) ]]; then
+if type -p vimpager >&-; then
     export PAGER=vimpager
     alias less='vimpager'
 else
