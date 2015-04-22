@@ -12,6 +12,21 @@ if [[ -z "$STARTED_TMUX"  && -n "$SSH_TTY" ]]; then
     echo "tmux failed to start"
 fi
 
+## function for updating ssh env vars
+## could be added to prompt
+function updatessh()
+{
+  if [[ ! -z "$TMUX" ]]; then
+    tmux show-environment | while read line; do
+      if [[ "${line}" =~ '^SSH' ]]; then
+         echo "export ${line%%=*}=\"${line#*=}\""
+      fi
+    done
+  else
+    echo "not in a tmux session"
+  fi
+}
+
 ## Color for ls
 eval $(dircolors -b ~/config/dircolors.ansi-light)
 
@@ -31,11 +46,20 @@ zstyle :compinstall filename '/home/anachron/.zshrc'
 ## PROMPT
 autoload -Uz promptinit && promptinit
 autoload -U colors && colors
+
+function virtual_env_prompt () {
+    REPLY=${VIRTUAL_ENV+${VIRTUAL_ENV:t} }
+}
+grml_theme_add_token virtual-env -f virtual_env_prompt '%F{magenta}' '%f'
+
+
 # PROMPT="[%{$fg[magenta]%}%M%{$reset_color%}] \
 # %{$fg[green]%}%n %{$fg[blue]%}%~%{$fg[yellow]%}$%{$reset_color%} "
 prompt grml-large
-zstyle ':prompt:grml-large:*:items:user' pre '%F{green}'
-zstyle ':prompt:grml-large:*:items:host' pre '%F{magenta}'
+# zstyle ':prompt:grml-large:*:items:user' pre '%F{green}'
+# zstyle ':prompt:grml-large:*:items:host' pre '%F{magenta}'
+zstyle ':prompt:grml-large:left:setup' items change-root user at host path newline percent
+zstyle ':prompt:grml-large:right:setup' items rc virtual-env change-root vcs jobs
 # zstyle ':prompt:grml-large:*:items:path' pre '%F{blue}'
 # zstyle ':prompt:grml-large:*:items:percent' pre '%F{yellow}'
 
