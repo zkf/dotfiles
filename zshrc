@@ -51,12 +51,7 @@ source ~/.aliases
 export PATH=$HOME/.cabal/bin:$HOME/.gem/ruby/2.0.0/bin:$PATH
 export BROWSER="firefox"
 export EDITOR=vim
-if type -p vimpager >&-; then
-    export PAGER=vimpager
-    alias less='vimpager'
-else
-    export PAGER=less
-fi
+export PAGER=less
 
 ## cabal2arch
 export ARCH_HASKELL='Bjørnar Hansen <tilbjornar@gmail.com>'
